@@ -8,14 +8,15 @@ import {
   TouchableOpacity,
   StatusBar,
 } from 'react-native';
+import axiosConfig from '../../api/BaseConfig';
 
 const Register = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confPassword, setConfirmPassword] = useState('');
+  const [confirmationPassword, setConfirmPassword] = useState('');
 
   const doRegister = () => {
-    const value = {email, password, confPassword};
+    const value = {email, password, confirmationPassword};
     console.log('debug input', value);
 
     const onSuccess = ({data}) => {

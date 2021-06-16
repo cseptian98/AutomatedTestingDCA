@@ -38,8 +38,7 @@ const Home = () => {
 
     axiosConfig.get('api/TodoLists').then(onSuccess).catch(onFailure);
   };
-
-  console.log('debug', items);
+  
   const renderItem = ({item}) => <List title={item.title} />;
 
   return (
