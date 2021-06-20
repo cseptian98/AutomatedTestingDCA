@@ -1,63 +1,56 @@
-import React, {useState, useEffect} from 'react';
-import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
-import InputTodo from '../../components/InputTodo';
-import List from '../../components/List';
-import axiosConfig from '../../api/BaseConfig';
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import TodoLists from '../../components/TodoLists';
+import TodoItems from '../../components/TodoItems'
+import Weather from '../../components/Weather';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-];
+const Tab = createBottomTabNavigator();
 
 const Home = () => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    getTodoItems();
-  }, [])
-
-  const getTodoItems = () => {
-    const onSuccess = ({data}) => {
-      console.log('debug success', data.lists[0].items);
-      setItems(data.lists[0].items);
-    };
-
-    const onFailure = error => {
-      console.log('debug error', error.response.data);
-    };
-
-    axiosConfig.get('api/TodoLists').then(onSuccess).catch(onFailure);
-  };
-  
-  const renderItem = ({item}) => <List title={item.title} />;
-
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={items}
-        renderItem={renderItem}
-        keyExtractor={items => items.id}
+    <Tab.Navigator
+      initialRouteName="Weather"
+      tabBarOptions={{
+        activeTintColor: '#212121',
+        style: {
+          backgroundColor: '#FFD500'
+        }
+      }}
+      backBehavior='history'
+    >
+      <Tab.Screen
+        name="Weather"
+        component={Weather}
+        options={{
+          tabBarLabel: 'Weather',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="weather-partly-cloudy" color={color} size={size} />
+          ),
+        }}
       />
-      <InputTodo />
-    </SafeAreaView>
+      <Tab.Screen
+        name="TodoList"
+        component={TodoLists}
+        options={{
+          tabBarLabel: 'List',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="playlist-edit" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="TodoItems"
+        component={TodoItems}
+        options={{
+          tabBarLabel: 'Item',
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="note-multiple" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
-});
 
 export default Home;

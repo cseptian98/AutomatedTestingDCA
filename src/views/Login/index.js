@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, {useState} from 'react';
 import {
   StyleSheet,
@@ -15,6 +14,7 @@ import axiosConfig, {setClientToken} from '../../api/BaseConfig';
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPass, setShowPass] = useState(true);
 
   const doLogin = () => {
     const value = {email, password};
@@ -31,16 +31,6 @@ const Login = ({navigation}) => {
     };
 
     axiosConfig.post('api/Auth/login', value).then(onSuccess).catch(onFailure);
-    // if (
-    //   email.toUpperCase() === myEmail.toUpperCase() &&
-    //   password === myPassword
-    // ) {
-    //   navigation.replace('Home');
-    // } else {
-    //   Alert.alert('Invalid username or password!');
-    // }
-    // setEmail('');
-    // setPassword('');
   };
 
   const doRegister = () => {
@@ -96,7 +86,7 @@ const styles = StyleSheet.create({
     width: 280,
     height: 180,
     marginBottom: 30,
-    marginTop: 30,
+    marginTop: 40,
   },
   inputView: {
     height: 45,
@@ -116,6 +106,8 @@ const styles = StyleSheet.create({
   loginButton: {
     height: 50,
     width: '80%',
+    marginTop: 20,
+    color: '#212121',
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
@@ -124,12 +116,12 @@ const styles = StyleSheet.create({
   registerButton: {
     height: 50,
     width: '80%',
+    marginTop: 20,
+    color: '#212121',
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#D1D9D9',
-    color: '#FFD500',
-    marginTop: 100,
+    backgroundColor: '#eceff1',
   },
 });
 

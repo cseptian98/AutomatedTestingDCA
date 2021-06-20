@@ -1,7 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
+import axiosConfig from '../../api/BaseConfig';
 
 const InputTodo = () => {
+  const [title, setTitle] = useState('');
+
+  const doCreate = () => {
+    const onSuccess = ({data}) => {
+      console.log('debug success', data);
+    };
+
+    const onFailure = error => {
+      console.log('debug error', error.response.data);
+    };
+
+    axiosConfig.post('api/TodoLists', {title}).then(onSuccess).catch(onFailure);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.inputView}>
@@ -9,9 +24,10 @@ const InputTodo = () => {
           style={styles.textInput}
           placeholder="Add Todo List..."
           placeholderTextColor="#000"
+          onChangeText={title => setTitle(title)}
         />
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={doCreate}>
         {/* ICON */}
       </TouchableOpacity>
     </View>
@@ -21,6 +37,7 @@ const InputTodo = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    marginTop: 20,
   },
   inputView: {
     borderRadius: 10,

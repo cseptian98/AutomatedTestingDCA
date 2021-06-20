@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   StatusBar,
+  BackHandler
 } from 'react-native';
 import axiosConfig from '../../api/BaseConfig';
 
@@ -14,6 +15,18 @@ const Register = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmationPassword, setConfirmPassword] = useState('');
+
+  const backAction = () => {
+    navigation.replace('Login');
+    return true;
+  }
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', backAction);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', backAction);
+    };
+  }, []);
 
   const doRegister = () => {
     const value = {email, password, confirmationPassword};
@@ -29,16 +42,6 @@ const Register = ({navigation}) => {
     };
 
     axiosConfig.post('api/Auth/register', value).then(onSuccess).catch(onFailure);
-    // if (
-    //   email.toUpperCase() === myEmail.toUpperCase() &&
-    //   password === myPassword
-    // ) {
-    //   navigation.replace('Home');
-    // } else {
-    //   Alert.alert('Invalid username or password!');
-    // }
-    // setEmail('');
-    // setPassword('');
   };
 
   return (
@@ -112,12 +115,11 @@ const styles = StyleSheet.create({
   registerButton: {
     height: 50,
     width: '80%',
+    marginTop: 40,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#D1D9D9',
-    color: '#FFD500',
-    marginTop: 100,
+    backgroundColor: '#eceff1',
   },
 });
 

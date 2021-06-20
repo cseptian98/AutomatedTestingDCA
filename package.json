@@ -7,14 +7,17 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "link": "react-native link",
+    "uninstall": "adb uninstall com.automateddca"
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^5.11.11",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
     "axios": "^0.21.1",
-    "react": "17.0.1",
-    "react-native": "0.64.2",
+    "react": "~17.0.1",
+    "react-native": "~0.63.4",
     "react-native-collapsible": "^1.6.0",
     "react-native-expandable": "^1.0.2",
     "react-native-gesture-handler": "^1.10.3",
