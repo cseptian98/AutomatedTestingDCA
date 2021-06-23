@@ -1,9 +1,10 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import TodoLists from '../../components/TodoLists';
-import TodoItems from '../../components/TodoItems'
-import Weather from '../../components/Weather';
+import TodoLists from 'components/TodoLists';
+import TodoItems from 'components/TodoItems';
+import Weather from 'components/Weather';
+import User from 'components/User';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,19 +13,18 @@ const Home = () => {
     <Tab.Navigator
       initialRouteName="Weather"
       tabBarOptions={{
-        activeTintColor: '#212121',
+        activeTintColor: '#424242',
         style: {
-          backgroundColor: '#FFD500'
-        }
+          backgroundColor: '#FFD500',
+        },
       }}
-      backBehavior='history'
-    >
+      backBehavior="history">
       <Tab.Screen
         name="Weather"
         component={Weather}
         options={{
           tabBarLabel: 'Weather',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({color, size}) => (
             <Icon name="weather-partly-cloudy" color={color} size={size} />
           ),
         }}
@@ -34,7 +34,7 @@ const Home = () => {
         component={TodoLists}
         options={{
           tabBarLabel: 'List',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({color, size}) => (
             <Icon name="playlist-edit" color={color} size={size} />
           ),
         }}
@@ -44,8 +44,18 @@ const Home = () => {
         component={TodoItems}
         options={{
           tabBarLabel: 'Item',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({color, size}) => (
             <Icon name="note-multiple" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="User"
+        component={User}
+        options={{
+          tabBarLabel: 'User',
+          tabBarIcon: ({color, size}) => (
+            <Icon name="account-circle" color={color} size={size} />
           ),
         }}
       />

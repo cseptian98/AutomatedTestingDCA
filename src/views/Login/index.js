@@ -9,12 +9,11 @@ import {
   StatusBar,
   Alert,
 } from 'react-native';
-import axiosConfig, {setClientToken} from '../../api/BaseConfig';
+import axiosConfig, {setClientToken} from 'api/BaseConfig';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPass, setShowPass] = useState(true);
 
   const doLogin = () => {
     const value = {email, password};
@@ -65,11 +64,11 @@ const Login = ({navigation}) => {
       </View>
 
       <TouchableOpacity style={styles.loginButton} onPress={doLogin}>
-        <Text>Login</Text>
+        <Text style={styles.textButton}>Login</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.registerButton} onPress={doRegister}>
-        <Text>Create Account</Text>
+        <Text style={styles.textButton}>Create Account</Text>
       </TouchableOpacity>
     </View>
   );
@@ -99,6 +98,9 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 30,
   },
+  textButton: {
+    color: '#212121',
+  },
   forgotButton: {
     height: 30,
     marginBottom: 30,
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
     marginTop: 20,
-    color: '#212121',
+    color: '#002F6C',
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
@@ -117,7 +119,6 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
     marginTop: 20,
-    color: '#212121',
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',

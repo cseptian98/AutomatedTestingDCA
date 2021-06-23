@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
-import List from '../List';
-import axiosConfig from '../../api/BaseConfig';
+import List from 'components/List';
+import axiosConfig from 'api/BaseConfig';
 
 const Weather = () => {
   const [weather, setWeather] = useState([]);

@@ -9,7 +9,7 @@ import {
   StatusBar,
   BackHandler
 } from 'react-native';
-import axiosConfig from '../../api/BaseConfig';
+import axiosConfig from 'api/BaseConfig';
 
 const Register = ({navigation}) => {
   const [email, setEmail] = useState('');

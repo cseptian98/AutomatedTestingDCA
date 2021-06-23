@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
-import InputTodo from '../Input';
-import List from '../List';
-import axiosConfig from '../../api/BaseConfig';
+import InputList from 'components/Input';
+import List from 'components/List';
+import axiosConfig from 'api/BaseConfig';
 
 const TodoLists = () => {
   const [list, setList] = useState([]);
@@ -33,7 +33,7 @@ const TodoLists = () => {
         renderItem={renderItem}
         keyExtractor={list => list.id}
       />
-      {/* <InputTodo /> */}
+      <InputList />
     </SafeAreaView>
   );
 };
