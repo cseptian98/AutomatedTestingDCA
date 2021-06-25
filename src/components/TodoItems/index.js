@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
+import {SafeAreaView, FlatList} from 'react-native';
+import styles from './TodoItems.styles';
 import List from 'components/List';
 import axiosConfig from 'api/BaseConfig';
+import InputItem from 'components/InputItem';
 
 const TodoItems = () => {
   const ListId = 1;
@@ -36,15 +38,9 @@ const TodoItems = () => {
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
+      <InputItem />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
-});
 
 export default TodoItems;

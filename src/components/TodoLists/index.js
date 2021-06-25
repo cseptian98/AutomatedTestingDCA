@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
-import InputList from 'components/Input';
+import {SafeAreaView, FlatList} from 'react-native';
+import styles from './TodoLists.styles';
+import InputList from 'components/InputList';
 import List from 'components/List';
 import axiosConfig from 'api/BaseConfig';
 
@@ -9,7 +10,7 @@ const TodoLists = () => {
 
   useEffect(() => {
     getTodoLists();
-  }, [])
+  }, []);
 
   const getTodoLists = () => {
     const onSuccess = ({data}) => {
@@ -23,7 +24,7 @@ const TodoLists = () => {
 
     axiosConfig.get('api/TodoLists').then(onSuccess).catch(onFailure);
   };
-  
+
   const renderItem = ({item}) => <List title={item.title} />;
 
   return (
@@ -37,12 +38,5 @@ const TodoLists = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
-});
 
 export default TodoLists;
