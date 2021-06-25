@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import {View, TextInput, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TextInput, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import styles from './InputList.styles';
 import axiosConfig from '../../api/BaseConfig';
 
 const InputList = () => {
   const [title, setTitle] = useState('');
 
-  const CreateNewList = () => {
+  const createNewList = () => {
     const onSuccess = ({data}) => {
       console.log('debug success', data);
     };
@@ -28,39 +29,11 @@ const InputList = () => {
           onChangeText={title => setTitle(title)}
         />
       </View>
-      <TouchableOpacity style={styles.button} onPress={CreateNewList}>
+      <TouchableOpacity style={styles.button} onPress={createNewList}>
         <Icon name="add" size={24} />
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    marginTop: 20,
-  },
-  inputView: {
-    borderRadius: 10,
-    flexDirection: 'row',
-  },
-  textInput: {
-    width: 300,
-    padding: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 20,
-    borderRadius: 10,
-    backgroundColor: '#FFD500',
-  },
-  button: {
-    width: 50,
-    marginBottom: 20,
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFD500',
-  },
-});
 
 export default InputList;
