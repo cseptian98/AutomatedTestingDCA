@@ -6,10 +6,10 @@ import {
   TextInput,
   TouchableOpacity,
   StatusBar,
-  BackHandler
+  BackHandler,
 } from 'react-native';
-import styles from './Register.styles'
-import axiosConfig from 'api/BaseConfig';
+import styles from './Register.styles';
+import apiConfig from 'api/BaseConfig';
 
 const Register = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -19,7 +19,7 @@ const Register = ({navigation}) => {
   const backAction = () => {
     navigation.replace('Login');
     return true;
-  }
+  };
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', backAction);
@@ -30,7 +30,6 @@ const Register = ({navigation}) => {
 
   const doRegister = () => {
     const value = {email, password, confirmationPassword};
-    console.log('debug input', value);
 
     const onSuccess = ({data}) => {
       console.log('debug success', data);
@@ -41,15 +40,12 @@ const Register = ({navigation}) => {
       console.log('debug error', error.response.data);
     };
 
-    axiosConfig.post('api/Auth/register', value).then(onSuccess).catch(onFailure);
+    apiConfig.post('api/Auth/register', value).then(onSuccess).catch(onFailure);
   };
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={require('assets/images/regis.png')}
-      />
+      <Image style={styles.image} source={require('assets/images/regis.png')} />
 
       <StatusBar style="auto" />
       <View style={styles.inputView}>

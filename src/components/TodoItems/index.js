@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {SafeAreaView, FlatList} from 'react-native';
 import styles from './TodoItems.styles';
 import List from 'components/List';
-import axiosConfig from 'api/BaseConfig';
 import InputItem from 'components/InputItem';
+import apiConfig from 'api/BaseConfig';
 
 const TodoItems = () => {
   const ListId = 1;
@@ -23,13 +23,33 @@ const TodoItems = () => {
       console.log('debug error', error.response.data);
     };
 
-    axiosConfig
+    apiConfig
       .get('api/TodoItems', {params: {ListId}})
       .then(onSuccess)
       .catch(onFailure);
   };
 
-  const renderItem = ({item}) => <List title={item.title} />;
+  const deleteItems = item => {
+    console.log(item.id);
+
+    // const onSuccess = () => {
+    //   console.log('debug deleted');
+    //   getTodoItems();
+    // };
+
+    // const onFailure = error => {
+    //   console.log('debug error delete', error.response.data);
+    // };
+
+    // axiosConfig
+    //   .delete(`api/TodoItems/${item.id}`)
+    //   .then(onSuccess)
+    //   .catch(onFailure);
+  };
+
+  const renderItem = ({item}) => (
+    <List title={item.title} onDelete={deleteItems(item)} />
+  );
 
   return (
     <SafeAreaView style={styles.container}>

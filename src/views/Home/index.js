@@ -3,7 +3,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import TodoLists from 'components/TodoLists';
 import TodoItems from 'components/TodoItems';
-import Weather from 'components/Weather';
 import User from 'components/User';
 
 const Tab = createBottomTabNavigator();
@@ -11,7 +10,7 @@ const Tab = createBottomTabNavigator();
 const Home = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Weather"
+      initialRouteName="TodoList"
       tabBarOptions={{
         activeTintColor: '#424242',
         style: {
@@ -19,16 +18,6 @@ const Home = () => {
         },
       }}
       backBehavior="history">
-      <Tab.Screen
-        name="Weather"
-        component={Weather}
-        options={{
-          tabBarLabel: 'Weather',
-          tabBarIcon: ({color, size}) => (
-            <Icon name="weather-partly-cloudy" color={color} size={size} />
-          ),
-        }}
-      />
       <Tab.Screen
         name="TodoList"
         component={TodoLists}

@@ -3,7 +3,7 @@ import {SafeAreaView, FlatList} from 'react-native';
 import styles from './TodoLists.styles';
 import InputList from 'components/InputList';
 import List from 'components/List';
-import axiosConfig from 'api/BaseConfig';
+import apiConfig from 'api/BaseConfig';
 
 const TodoLists = () => {
   const [list, setList] = useState([]);
@@ -22,7 +22,7 @@ const TodoLists = () => {
       console.log('debug error', error.response.data);
     };
 
-    axiosConfig.get('api/TodoLists').then(onSuccess).catch(onFailure);
+    apiConfig.get('api/TodoLists').then(onSuccess).catch(onFailure);
   };
 
   const renderItem = ({item}) => <List title={item.title} />;

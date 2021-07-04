@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, TextInput, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import axiosConfig from '../../api/BaseConfig';
+import apiConfig from '../../api/BaseConfig';
 import styles from './InputItems.styles';
 
 const InputItem = () => {
@@ -11,13 +11,14 @@ const InputItem = () => {
   const createNewItem = () => {
     const onSuccess = ({data}) => {
       console.log('debug success', data);
+      setTitle('');
     };
 
     const onFailure = error => {
       console.log('debug error', error.response.data);
     };
 
-    axiosConfig
+    apiConfig
       .post('api/TodoItems', {listId, title})
       .then(onSuccess)
       .catch(onFailure);
