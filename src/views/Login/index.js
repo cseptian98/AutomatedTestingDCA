@@ -23,10 +23,6 @@ const Login = ({navigation}) => {
         navigation.replace('Home');
       }
     });
-    // console.log(user);
-    // if(user !== null) {
-    //   navigation.replace('Home');
-    // } 
   }, []);
 
   const doLogin = () => {

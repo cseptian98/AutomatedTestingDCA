@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, FlatList} from 'react-native';
+import {SafeAreaView, FlatList, Alert} from 'react-native';
 import styles from './TodoItems.styles';
 import List from 'components/List';
 import InputItem from 'components/InputItem';
-import apiConfig from 'api/BaseConfig';
+import axiosConfig from 'api/BaseConfig';
 
 const TodoItems = () => {
   const ListId = 1;
@@ -15,7 +15,6 @@ const TodoItems = () => {
 
   const getTodoItems = () => {
     const onSuccess = ({data}) => {
-      console.log('debug success', data.items);
       setItem(data.items);
     };
 
@@ -23,7 +22,7 @@ const TodoItems = () => {
       console.log('debug error', error.response.data);
     };
 
-    apiConfig
+    axiosConfig
       .get('api/TodoItems', {params: {ListId}})
       .then(onSuccess)
       .catch(onFailure);
@@ -32,23 +31,37 @@ const TodoItems = () => {
   const deleteItems = item => {
     console.log(item.id);
 
-    // const onSuccess = () => {
-    //   console.log('debug deleted');
-    //   getTodoItems();
-    // };
+    const onSuccess = () => {
+      console.log('debug deleted');
+      getTodoItems();
+    };
 
-    // const onFailure = error => {
-    //   console.log('debug error delete', error.response.data);
-    // };
+    const onFailure = error => {
+      console.log('debug error delete', error);
+    };
 
-    // axiosConfig
-    //   .delete(`api/TodoItems/${item.id}`)
-    //   .then(onSuccess)
-    //   .catch(onFailure);
+    axiosConfig
+      .delete(`api/TodoItems/${item.id}`)
+      .then(onSuccess)
+      .catch(onFailure);
   };
 
   const renderItem = ({item}) => (
-    <List title={item.title} onDelete={deleteItems(item)} />
+    <List
+      title={item.title}
+      onDelete={() =>
+        Alert.alert('Delete Item', 'Are you sure to delete this item?', [
+          {
+            text: 'No',
+            onPress: () => console.log('Cancel'),
+          },
+          {
+            text: 'Yes',
+            onPress: () => deleteItems(item),
+          },
+        ])
+      }
+    />
   );
 
   return (

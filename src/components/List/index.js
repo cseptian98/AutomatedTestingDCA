@@ -1,11 +1,11 @@
 import React from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
+import {TouchableOpacity, Text, View} from 'react-native';
 import styles from './List.styles';
 
-const List = ({title}) => (
-  <View style={styles.item}>
+const List = ({title, onDelete}) => (
+  <TouchableOpacity style={styles.item} onPress={onDelete}>
     <Text style={styles.title}>{title}</Text>
-  </View>
+  </TouchableOpacity>
 );
 
 export default List;
