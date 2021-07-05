@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, TextInput, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './InputList.styles';
-import apiConfig from '../../api/BaseConfig';
+import axiosConfig from 'api/BaseConfig';
 
 const InputList = () => {
   const [title, setTitle] = useState('');
@@ -16,7 +16,7 @@ const InputList = () => {
       console.log('debug error', error.response.data);
     };
 
-    apiConfig.post('api/TodoLists', {title}).then(onSuccess).catch(onFailure);
+    axiosConfig.post('api/TodoLists', {title}).then(onSuccess).catch(onFailure);
   };
 
   return (

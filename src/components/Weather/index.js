@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, FlatList, StyleSheet} from 'react-native';
 import List from 'components/List';
-import apiConfig from 'api/BaseConfig';
+import axiosConfig from 'api/BaseConfig';
 
 const Weather = () => {
   const [weather, setWeather] = useState([]);
@@ -20,7 +20,7 @@ const Weather = () => {
       console.log('debug error', error.response.data);
     };
 
-    apiConfig.get('api/WeatherForecast').then(onSuccess).catch(onFailure);
+    axiosConfig.get('api/WeatherForecast').then(onSuccess).catch(onFailure);
   };
 
   const renderItem = ({item}) => <List title={item.temperatureC} />;

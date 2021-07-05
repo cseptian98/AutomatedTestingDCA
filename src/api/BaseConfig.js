@@ -2,23 +2,20 @@ import * as axios from 'axios';
 
 const API_URL = 'http://10.0.2.2:5000/';
 
-const axiosConfig = {
+const axiosConfig = axios.create({
   baseURL: API_URL,
   timeout: 15000,
   headers: {
-    Accept: 'application/json',
+    Accept: 'application/json,application/pdf,application/octet-stream',
     'Content-Type': 'application/json',
   },
-};
+});
 
 export const setToken = token => {
-  axiosConfig.headers.Authorization = `Bearer ${token}`;
+  axiosConfig.interceptors.request.use(function(config) {
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
 };
 
-export const deleteToken = () => {
-  delete axiosConfig.headers.Authorization;
-};
-
-const apiConfig = () => axios.create(axiosConfig);
-
-export default apiConfig;
+export default axiosConfig;

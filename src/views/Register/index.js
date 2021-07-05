@@ -9,7 +9,7 @@ import {
   BackHandler,
 } from 'react-native';
 import styles from './Register.styles';
-import apiConfig from 'api/BaseConfig';
+import axiosConfig from 'api/BaseConfig';
 
 const Register = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -37,10 +37,10 @@ const Register = ({navigation}) => {
     };
 
     const onFailure = error => {
-      console.log('debug error', error.response.data);
+      console.log('debug error', error);
     };
 
-    apiConfig.post('api/Auth/register', value).then(onSuccess).catch(onFailure);
+    axiosConfig.post('api/Auth/register', value).then(onSuccess).catch(onFailure);
   };
 
   return (
