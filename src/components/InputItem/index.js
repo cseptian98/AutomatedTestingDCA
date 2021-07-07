@@ -15,7 +15,7 @@ const InputItem = () => {
     };
 
     const onFailure = error => {
-      console.log('debug error', error.response.data);
+      console.log('debug error', error);
     };
 
     axiosConfig

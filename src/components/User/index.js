@@ -13,7 +13,7 @@ const User = ({navigation}) => {
     });
   });
 
-  const logout = () => {
+  const doLogout = () => {
     const onSuccess = () => {
       deleteData();
       navigation.replace('Login');
@@ -38,7 +38,7 @@ const User = ({navigation}) => {
             },
             {
               text: 'Yes',
-              onPress: () => logout(),
+              onPress: () => doLogout(),
             },
           ])
         }>

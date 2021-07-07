@@ -1,15 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import {SafeAreaView, FlatList, Alert} from 'react-native';
 import styles from './TodoItems.styles';
-import List from 'components/List';
+import Item from 'components/Item';
 import InputItem from 'components/InputItem';
 import axiosConfig from 'api/BaseConfig';
 
-const TodoItems = () => {
-  const ListId = 1;
+const TodoItems = ({route}) => {
+  const {ListId} = route.params;
+  console.log('debug', ListId);
   const [item, setItem] = useState([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getTodoItems();
   }, []);
 
@@ -19,7 +20,7 @@ const TodoItems = () => {
     };
 
     const onFailure = error => {
-      console.log('debug error', error.response.data);
+      console.log('debug error', error);
     };
 
     axiosConfig
@@ -47,7 +48,7 @@ const TodoItems = () => {
   };
 
   const renderItem = ({item}) => (
-    <List
+    <Item
       title={item.title}
       onDelete={() =>
         Alert.alert('Delete Item', 'Are you sure to delete this item?', [

@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: 10,
   },
   inputView: {
     borderRadius: 10,
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   textInput: {
     width: 300,
     padding: 10,
-    marginLeft: 10,
+    marginLeft: 20,
     marginRight: 10,
     marginBottom: 20,
     borderRadius: 10,
