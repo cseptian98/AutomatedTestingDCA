@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
   listContainer: {
@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    padding: 10,
+    padding: 12,
     marginLeft: 12,
     marginRight: 20,
     borderRadius: 10,
@@ -18,12 +18,10 @@ const styles = StyleSheet.create({
   },
   delete: {
     color: 'red',
-    fontSize: 20,
     marginRight: 10,
-    fontWeight: 'bold',
     alignItems: 'center',
     justifyContent: 'center',
   }
-});
+})
 
-export default styles;
+export default styles

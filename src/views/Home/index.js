@@ -1,11 +1,11 @@
-import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import TodoLists from 'components/TodoLists';
-import TodoItems from 'components/TodoItems';
-import User from 'components/User';
+import React from 'react'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import TodoLists from 'components/TodoLists'
+import TodoItems from 'components/TodoItems'
+import User from 'components/User'
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
 const Home = () => {
   return (
@@ -49,7 +49,7 @@ const Home = () => {
         }}
       />
     </Tab.Navigator>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

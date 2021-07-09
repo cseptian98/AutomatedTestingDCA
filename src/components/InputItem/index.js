@@ -1,28 +1,27 @@
-import React, {useState} from 'react';
-import {View, TextInput, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import axiosConfig from 'api/BaseConfig';
-import styles from './InputItems.styles';
+import React, {useState} from 'react'
+import {View, TextInput, TouchableOpacity} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import axiosConfig from 'api/BaseConfig'
+import styles from './InputItems.styles'
 
-const InputItem = () => {
-  const listId = 1;
-  const [title, setTitle] = useState('');
+const InputItem = ({listId}) => {
+  const [title, setTitle] = useState('')
 
   const createNewItem = () => {
     const onSuccess = ({data}) => {
-      console.log('debug success', data);
-      setTitle('');
-    };
+      console.log('debug success', data)
+      setTitle('')
+    }
 
     const onFailure = error => {
-      console.log('debug error', error);
-    };
+      console.log('debug error', error)
+    }
 
     axiosConfig
       .post('api/TodoItems', {listId, title})
       .then(onSuccess)
-      .catch(onFailure);
-  };
+      .catch(onFailure)
+  }
 
   return (
     <View style={styles.container}>
@@ -38,7 +37,7 @@ const InputItem = () => {
         <Icon name="add" size={24} />
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
-export default InputItem;
+export default InputItem

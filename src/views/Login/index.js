@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react'
 import {
   Text,
   View,
@@ -7,52 +7,51 @@ import {
   TouchableOpacity,
   StatusBar,
   Alert,
-} from 'react-native';
-import styles from './Login.styles';
-import axiosConfig, {setToken} from 'api/BaseConfig';
-import {storeData, getData} from 'api/Local';
+} from 'react-native'
+import {StackActions} from '@react-navigation/native'
+import styles from './Login.styles'
+import axiosConfig, {setToken} from 'api/BaseConfig'
+import {storeData, getData} from 'api/Local'
 
 const Login = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   useEffect(() => {
     getData().then(value => {
-      if(value !== null) {
-        setToken(value.token);
-        navigation.replace('Home');
+      if (value !== null) {
+        setToken(value.token)
+        navigation.replace('Home')
       }
-    });
-  }, []);
+    })
+  }, [])
 
   const doLogin = () => {
     const onSuccess = ({data}) => {
-      console.log('debug success', data);
-      storeData(data);
-      setToken(data.token);
-      navigation.replace('Home');
-    };
+      console.log('debug success', data)
+      storeData(data)
+      setToken(data.token)
+      navigation.replace('Home')
+    }
 
     const onFailure = error => {
-      console.log('debug error', error);
-    };
+      console.log('debug error', error)
+    }
 
     axiosConfig
       .post('api/Auth/login', {email, password})
       .then(onSuccess)
-      .catch(onFailure);
-  };
+      .catch(onFailure)
+  }
 
-  const doRegister = () => {
-    navigation.replace('Register');
-  };
+  const toRegister = () => {
+    const movePage = StackActions.push('Register')
+    navigation.dispatch(movePage)
+  }
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={require('assets/images/login.png')}
-      />
+      <Image style={styles.image} source={require('assets/images/login.png')} />
 
       <StatusBar style="auto" />
       <View style={styles.inputView}>
@@ -78,11 +77,11 @@ const Login = ({navigation}) => {
         <Text style={styles.textButton}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.registerButton} onPress={doRegister}>
+      <TouchableOpacity style={styles.registerButton} onPress={toRegister}>
         <Text style={styles.textButton}>Create Account</Text>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

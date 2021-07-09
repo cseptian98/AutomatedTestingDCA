@@ -1,57 +1,56 @@
-import React, {useState, useLayoutEffect} from 'react';
-import {SafeAreaView, Alert} from 'react-native';
-import styles from './TodoLists.styles';
-import InputList from 'components/InputList';
-import List from 'components/List';
-import axiosConfig from 'api/BaseConfig';
+import React, {useState, useCallback} from 'react'
+import {SafeAreaView, Alert} from 'react-native'
+import styles from './TodoLists.styles'
+import InputList from 'components/InputList'
+import List from 'components/List'
+import axiosConfig from 'api/BaseConfig'
+import {useFocusEffect} from '@react-navigation/native'
 
 const TodoLists = ({navigation}) => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState([])
 
-  useLayoutEffect(() => {
-    getTodoLists();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getTodoLists()
+    }, []),
+  )
 
   const getTodoLists = () => {
     const onSuccess = ({data}) => {
-      console.log('debug success', data);
-      setList(data.lists);
-    };
+      console.log('debug success', data)
+      setList(data.lists)
+    }
 
     const onFailure = error => {
-      console.log('debug error', error);
-    };
+      console.log('debug error', error)
+    }
 
-    axiosConfig.get('api/TodoLists').then(onSuccess).catch(onFailure);
-  };
-
-  const moveToItems = item => {
-    navigation.navigate('TodoItems', {
-      ListId: item.id,
-    });
-  };
+    axiosConfig.get('api/TodoLists').then(onSuccess).catch(onFailure)
+  }
 
   const deleteList = item => {
-    console.log(item.id);
+    console.log(item.id)
 
     const onSuccess = () => {
-      console.log('debug deleted');
-      getTodoLists();
-    };
+      console.log('debug deleted')
+      getTodoLists()
+    }
 
     const onFailure = error => {
-      console.log('debug error delete', error);
-    };
+      console.log('debug error delete', error)
+    }
 
     axiosConfig
       .delete(`api/TodoLists/${item.id}`)
       .then(onSuccess)
-      .catch(onFailure);
-  };
+      .catch(onFailure)
+  }
 
-  const renderItem = ({item}) => (
-    <List title={item.title} onPress={() => moveToItems(item)} />
-  );
+  const moveToItems = item => {
+    navigation.navigate('TodoItems', {
+      ListId: item.id,
+    })
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -75,15 +74,10 @@ const TodoLists = ({navigation}) => {
               ])
             }
           />
-        );
+        )
       })}
-      {/* <FlatList
-        data={list}
-        renderItem={renderItem}
-        keyExtractor={list => list.id}
-      /> */}
     </SafeAreaView>
-  );
-};
+  )
+}
 
-export default TodoLists;
+export default TodoLists

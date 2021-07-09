@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#C62828',
   },
-});
+})
 
-export default styles;
+export default styles

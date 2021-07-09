@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react'
 import {
   Text,
   View,
@@ -7,41 +7,51 @@ import {
   TouchableOpacity,
   StatusBar,
   BackHandler,
-} from 'react-native';
-import styles from './Register.styles';
-import axiosConfig from 'api/BaseConfig';
+} from 'react-native'
+import styles from './Register.styles'
+import axiosConfig from 'api/BaseConfig'
+import {StackActions} from '@react-navigation/routers'
 
 const Register = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmationPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmationPassword, setConfirmPassword] = useState('')
 
   const backAction = () => {
-    navigation.replace('Login');
-    return true;
-  };
+    const movePage = StackActions.push('Login')
+    navigation.dispatch(movePage)
+  }
 
   useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', backAction);
+    BackHandler.addEventListener('hardwareBackPress', backAction)
     return () => {
-      BackHandler.removeEventListener('hardwareBackPress', backAction);
-    };
-  }, []);
+      BackHandler.removeEventListener('hardwareBackPress', backAction)
+    }
+  }, [])
 
   const doRegister = () => {
-    const value = {email, password, confirmationPassword};
+    const value = {email, password, confirmationPassword}
 
     const onSuccess = ({data}) => {
-      console.log('debug success', data);
-      navigation.replace('Login');
-    };
+      console.log('debug success', data)
+      navigation.replace('Login')
+    }
 
     const onFailure = error => {
-      console.log('debug error', error);
-    };
+      console.log('debug error', error)
+      Alert.alert('Error Register', 'Error', [
+        {
+          text: 'Oke',
+          onPress: () => console.log('Cancel'),
+        },
+      ])
+    }
 
-    axiosConfig.post('api/Auth/register', value).then(onSuccess).catch(onFailure);
-  };
+    axiosConfig
+      .post('api/Auth/register', value)
+      .then(onSuccess)
+      .catch(onFailure)
+  }
 
   return (
     <View style={styles.container}>
@@ -81,7 +91,7 @@ const Register = ({navigation}) => {
         <Text>Register</Text>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
