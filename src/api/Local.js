@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import axiosConfig from './BaseConfig'
 
 const storeData = async value => {
   try {
@@ -14,7 +13,6 @@ const getData = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('user')
     const value = JSON.parse(jsonValue)
-    console.log('debug', value)
     return jsonValue !== null ? value : null
   } catch (e) {
     console.log('error', e)

@@ -21,6 +21,7 @@ const Home = () => {
       <Tab.Screen
         name="TodoList"
         component={TodoLists}
+        initialParams={{ url: 'api/TodoLists' }}
         options={{
           tabBarLabel: 'List',
           tabBarIcon: ({color, size}) => (
@@ -31,6 +32,7 @@ const Home = () => {
       <Tab.Screen
         name="TodoItems"
         component={TodoItems}
+        initialParams={{ url: 'api/TodoItems' }}
         options={{
           tabBarLabel: 'Item',
           tabBarIcon: ({color, size}) => (

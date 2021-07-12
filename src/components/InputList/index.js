@@ -10,10 +10,11 @@ const InputList = () => {
   const createNewList = () => {
     const onSuccess = ({data}) => {
       console.log('debug success', data)
+      setTitle('')
     }
 
     const onFailure = error => {
-      console.log('debug error', error.response.data)
+      console.log('debug error', error)
     }
 
     axiosConfig.post('api/TodoLists', {title}).then(onSuccess).catch(onFailure)

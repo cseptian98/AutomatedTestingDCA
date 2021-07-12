@@ -1,39 +1,36 @@
-import React, {useState, useCallback} from 'react'
-import {SafeAreaView, Alert} from 'react-native'
+import React, {useState, useEffect} from 'react'
+import {SafeAreaView, Alert, View} from 'react-native'
 import styles from './TodoLists.styles'
 import InputList from 'components/InputList'
 import List from 'components/List'
 import axiosConfig from 'api/BaseConfig'
-import {useFocusEffect} from '@react-navigation/native'
+import {useRoute} from '@react-navigation/native'
 
-const TodoLists = ({navigation}) => {
+const TodoLists = ({navigation: {navigate}}) => {
+  const route = useRoute()
   const [list, setList] = useState([])
+  const {url} = route.params
 
-  useFocusEffect(
-    useCallback(() => {
-      getTodoLists()
-    }, []),
-  )
+  useEffect(() => {
+    async function getTodoLists() {
+      const onSuccess = ({data}) => {
+        console.log('debug success', data)
+        setList(data.lists)
+      }
 
-  const getTodoLists = () => {
-    const onSuccess = ({data}) => {
-      console.log('debug success', data)
-      setList(data.lists)
+      const onFailure = error => {
+        console.log('debug error', error)
+      }
+
+      const value = await axiosConfig.get(url).then(onSuccess).catch(onFailure)
+      return value
     }
-
-    const onFailure = error => {
-      console.log('debug error', error)
-    }
-
-    axiosConfig.get('api/TodoLists').then(onSuccess).catch(onFailure)
-  }
+    getTodoLists()
+  }, [list])
 
   const deleteList = item => {
-    console.log(item.id)
-
     const onSuccess = () => {
       console.log('debug deleted')
-      getTodoLists()
     }
 
     const onFailure = error => {
@@ -47,7 +44,7 @@ const TodoLists = ({navigation}) => {
   }
 
   const moveToItems = item => {
-    navigation.navigate('TodoItems', {
+    navigate('TodoItems', {
       ListId: item.id,
     })
   }
