@@ -6,16 +6,18 @@ import {
   TextInput,
   TouchableOpacity,
   StatusBar,
+  ActivityIndicator,
   Alert,
 } from 'react-native'
-import {StackActions} from '@react-navigation/native'
 import styles from './Login.styles'
-import axiosConfig, {setToken} from 'api/BaseConfig'
 import {storeData, getData} from 'api/Local'
+import axiosConfig, {setToken} from 'api/BaseConfig'
+import {StackActions} from '@react-navigation/native'
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     getData().then(value => {
@@ -27,15 +29,22 @@ const Login = ({navigation}) => {
   }, [])
 
   const doLogin = () => {
+    setIsLoading(true)
     const onSuccess = ({data}) => {
-      console.log('debug success', data)
+      setIsLoading(false)
       storeData(data)
       setToken(data.token)
       navigation.replace('Home')
     }
 
-    const onFailure = error => {
-      console.log('debug error', error)
+    const onFailure = data => {
+      console.log('debug error', data)
+      Alert.alert('Login Error', 'Error Message', [
+        {
+          text: 'Close',
+          onPress: () => setIsLoading(false),
+        },
+      ])
     }
 
     axiosConfig
@@ -72,14 +81,18 @@ const Login = ({navigation}) => {
           onChangeText={password => setPassword(password)}
         />
       </View>
-
-      <TouchableOpacity style={styles.loginButton} onPress={doLogin}>
-        <Text style={styles.textButton}>Login</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.registerButton} onPress={toRegister}>
-        <Text style={styles.textButton}>Create Account</Text>
-      </TouchableOpacity>
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#FFD500" />
+      ) : (
+        <>
+          <TouchableOpacity style={styles.loginButton} onPress={doLogin}>
+            <Text style={styles.textButton}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.registerButton} onPress={toRegister}>
+            <Text style={styles.textButton}>Create Account</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   )
 }

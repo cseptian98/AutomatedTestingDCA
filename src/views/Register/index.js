@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   StatusBar,
   BackHandler,
+  Alert,
+  ActivityIndicator
 } from 'react-native'
 import styles from './Register.styles'
 import axiosConfig from 'api/BaseConfig'
@@ -16,10 +18,12 @@ const Register = ({navigation}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmationPassword, setConfirmPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const backAction = () => {
-    const movePage = StackActions.push('Login')
+    const movePage = StackActions.pop(1)
     navigation.dispatch(movePage)
+    return true
   }
 
   useEffect(() => {
@@ -31,9 +35,10 @@ const Register = ({navigation}) => {
 
   const doRegister = () => {
     const value = {email, password, confirmationPassword}
+    setIsLoading(true)
 
-    const onSuccess = ({data}) => {
-      console.log('debug success', data)
+    const onSuccess = () => {
+      setIsLoading(false)
       navigation.replace('Login')
     }
 
@@ -42,7 +47,7 @@ const Register = ({navigation}) => {
       Alert.alert('Error Register', 'Error', [
         {
           text: 'Oke',
-          onPress: () => console.log('Cancel'),
+          onPress: () => setIsLoading(false),
         },
       ])
     }
@@ -87,9 +92,15 @@ const Register = ({navigation}) => {
         />
       </View>
 
-      <TouchableOpacity style={styles.registerButton} onPress={doRegister}>
-        <Text>Register</Text>
-      </TouchableOpacity>
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#FFD500" />
+      ) : (
+        <>
+          <TouchableOpacity style={styles.registerButton} onPress={doRegister}>
+            <Text>Register</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </View>
   )
 }
