@@ -79,6 +79,7 @@ const Register = ({navigation}) => {
           style={styles.textInput}
           placeholder="Email"
           placeholderTextColor="#000"
+          keyboardType="email-address"
           onChangeText={email => setEmail(email)}
         />
       </View>
