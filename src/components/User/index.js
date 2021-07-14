@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {View, TouchableOpacity, Text, Alert} from 'react-native'
+import {View, TouchableOpacity, Text, Alert, Image} from 'react-native'
 import {deleteData, getData} from 'api/Local'
 import axiosConfig from 'api/BaseConfig'
 import styles from './User.styles'
@@ -28,17 +28,21 @@ const User = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.image}
+        source={require('assets/images/profil.png')}
+      />
       <TouchableOpacity
         style={styles.deleteButton}
         onPress={() =>
           Alert.alert('Logout', 'Are you sure to Logout?', [
             {
-              text: 'No',
-              onPress: () => console.log('Cancel'),
-            },
-            {
               text: 'Yes',
               onPress: () => doLogout(),
+            },
+            {
+              text: 'No',
+              onPress: () => console.log('Cancel'),
             },
           ])
         }>

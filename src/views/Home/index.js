@@ -12,9 +12,9 @@ const Home = () => {
     <Tab.Navigator
       initialRouteName="TodoList"
       tabBarOptions={{
-        activeTintColor: '#424242',
+        activeTintColor: '#0D47A1',
         style: {
-          backgroundColor: '#FFD500',
+          backgroundColor: '#FFF',
         },
       }}
       backBehavior="history">

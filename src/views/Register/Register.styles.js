@@ -24,14 +24,17 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 30,
   },
+  registerText: {
+    color: '#FFF'
+  },
   registerButton: {
     height: 50,
     width: '80%',
-    marginTop: 40,
+    marginTop: 30,
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFD500',
+    backgroundColor: '#0D47A1',
   },
 })
 

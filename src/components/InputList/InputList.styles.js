@@ -5,26 +5,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 10,
   },
-  inputView: {
-    borderRadius: 10,
-    flexDirection: 'row',
-  },
-  textInput: {
-    width: 300,
-    padding: 10,
-    marginLeft: 20,
-    marginRight: 10,
-    marginBottom: 20,
-    borderRadius: 10,
-    backgroundColor: '#FFD500',
-  },
-  button: {
-    width: 50,
-    marginBottom: 20,
-    borderRadius: 50,
+  image: {
+    width: 160,
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFD500',
+  },
+  inputView: {
+    borderRadius: 10,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  textInput: {
+    width: 200,
+    padding: 10,
+    marginLeft: 16,
+    marginBottom: 10,
+    borderRadius: 10,
+    color: '#FFF',
+    backgroundColor: '#0D47A1',
+  },
+  button: {
+    width: 200,
+    marginLeft: 16,
+    marginBottom: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#0D47A1',
   },
 })
 

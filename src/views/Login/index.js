@@ -82,14 +82,14 @@ const Login = ({navigation}) => {
         />
       </View>
       {isLoading ? (
-        <ActivityIndicator size="large" color="#FFD500" />
+        <ActivityIndicator size="large" color="#0D47A1" />
       ) : (
         <>
           <TouchableOpacity style={styles.loginButton} onPress={doLogin}>
             <Text style={styles.textButton}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.registerButton} onPress={toRegister}>
-            <Text style={styles.textButton}>Create Account</Text>
+            <Text style={styles.textButton2}>Create Account</Text>
           </TouchableOpacity>
         </>
       )}

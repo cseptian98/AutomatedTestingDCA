@@ -11,13 +11,13 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     marginRight: 20,
     borderRadius: 10,
-    backgroundColor: '#FFD500',
+    backgroundColor: '#0D47A1',
   },
   title: {
     fontSize: 24,
+    color: '#FFF',
   },
   delete: {
-    color: 'red',
     marginRight: 10,
     alignItems: 'center',
     justifyContent: 'center',

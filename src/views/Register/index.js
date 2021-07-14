@@ -8,7 +8,7 @@ import {
   StatusBar,
   BackHandler,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native'
 import styles from './Register.styles'
 import axiosConfig from 'api/BaseConfig'
@@ -38,15 +38,23 @@ const Register = ({navigation}) => {
     setIsLoading(true)
 
     const onSuccess = () => {
-      setIsLoading(false)
-      navigation.replace('Login')
+      const registerSuccess = () => {
+        setIsLoading(false)
+        navigation.replace('Login')
+      }
+      Alert.alert('Register Success', 'Your Account Succesfully Registered', [
+        {
+          text: 'Oke',
+          onPress: () => registerSuccess(),
+        },
+      ])
     }
 
     const onFailure = error => {
       console.log('debug error', error)
-      Alert.alert('Error Register', 'Error', [
+      Alert.alert('Register Error', 'Error Message', [
         {
-          text: 'Oke',
+          text: 'Close',
           onPress: () => setIsLoading(false),
         },
       ])
@@ -60,7 +68,10 @@ const Register = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require('assets/images/regis.png')} />
+      <Image
+        style={styles.image}
+        source={require('assets/images/register.png')}
+      />
 
       <StatusBar style="auto" />
       <View style={styles.inputView}>
@@ -93,11 +104,11 @@ const Register = ({navigation}) => {
       </View>
 
       {isLoading ? (
-        <ActivityIndicator size="large" color="#FFD500" />
+        <ActivityIndicator size="large" color="#0D47A1" />
       ) : (
         <>
           <TouchableOpacity style={styles.registerButton} onPress={doRegister}>
-            <Text>Register</Text>
+            <Text style={styles.registerText}>Register</Text>
           </TouchableOpacity>
         </>
       )}

@@ -3,28 +3,37 @@ import {StyleSheet} from 'react-native'
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: 10,
+  },
+  image: {
+    width: 160,
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   inputView: {
     borderRadius: 10,
-    flexDirection: 'row',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   textInput: {
-    width: 300,
+    width: 200,
     padding: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 20,
+    marginLeft: 16,
+    marginBottom: 10,
     borderRadius: 10,
-    backgroundColor: '#FFD500',
+    color: '#FFF',
+    backgroundColor: '#0D47A1',
   },
   button: {
-    width: 50,
-    marginBottom: 20,
-    borderRadius: 50,
+    width: 200,
+    marginLeft: 16,
+    marginBottom: 10,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFD500',
+    backgroundColor: '#0D47A1',
   },
 })
 

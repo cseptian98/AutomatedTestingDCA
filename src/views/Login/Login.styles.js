@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     height: 30,
   },
   textButton: {
+    color: '#FFF',
+  },
+  textButton2: {
     color: '#212121',
   },
   forgotButton: {
@@ -35,11 +38,10 @@ const styles = StyleSheet.create({
     height: 50,
     width: '80%',
     marginTop: 20,
-    color: '#002F6C',
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFD500',
+    backgroundColor: '#0D47A1',
   },
   registerButton: {
     height: 50,
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#eceff1',
+    backgroundColor: '#E3F2FD',
   },
 })
 

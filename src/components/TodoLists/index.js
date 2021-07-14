@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {SafeAreaView, Alert, View} from 'react-native'
+import {SafeAreaView, Alert, ScrollView} from 'react-native'
 import styles from './TodoLists.styles'
 import InputList from 'components/InputList'
 import List from 'components/List'
@@ -9,6 +9,7 @@ import {useRoute} from '@react-navigation/native'
 const TodoLists = ({navigation: {navigate}}) => {
   const route = useRoute()
   const [list, setList] = useState([])
+  const [refetch, setRefetch] = useState(false)
   const {url} = route.params
 
   useEffect(() => {
@@ -26,14 +27,17 @@ const TodoLists = ({navigation: {navigate}}) => {
       return value
     }
     getTodoLists()
-  }, [list])
+    setRefetch(false)
+  }, [refetch])
 
   const deleteList = item => {
     const onSuccess = () => {
+      setRefetch(true)
       console.log('debug deleted')
     }
 
     const onFailure = error => {
+      setRefetch(true)
       console.log('debug error delete', error)
     }
 
@@ -41,6 +45,20 @@ const TodoLists = ({navigation: {navigate}}) => {
       .delete(`api/TodoLists/${item.id}`)
       .then(onSuccess)
       .catch(onFailure)
+  }
+
+  const createNewList = title => {
+    const onSuccess = ({data}) => {
+      setRefetch(true)
+      console.log('debug success', data)
+    }
+
+    const onFailure = error => {
+      setRefetch(true)
+      console.log('debug error', error)
+    }
+
+    axiosConfig.post('api/TodoLists', {title}).then(onSuccess).catch(onFailure)
   }
 
   const moveToItems = item => {
@@ -51,28 +69,34 @@ const TodoLists = ({navigation: {navigate}}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <InputList />
-      {list.map(item => {
-        return (
-          <List
-            key={item.id}
-            title={item.title}
-            onPress={() => moveToItems(item)}
-            onDelete={() =>
-              Alert.alert('Delete Item', 'Are you sure to delete this item?', [
-                {
-                  text: 'No',
-                  onPress: () => console.log('Cancel'),
-                },
-                {
-                  text: 'Yes',
-                  onPress: () => deleteList(item),
-                },
-              ])
-            }
-          />
-        )
-      })}
+      <InputList createList={createNewList} />
+      <ScrollView>
+        {list.map(item => {
+          return (
+            <List
+              key={item.id}
+              title={item.title}
+              onPress={() => moveToItems(item)}
+              onDelete={() =>
+                Alert.alert(
+                  'Delete Item',
+                  'Are you sure to delete this item?',
+                  [
+                    {
+                      text: 'No',
+                      onPress: () => console.log('Cancel'),
+                    },
+                    {
+                      text: 'Yes',
+                      onPress: () => deleteList(item),
+                    },
+                  ],
+                )
+              }
+            />
+          )
+        })}
+      </ScrollView>
     </SafeAreaView>
   )
 }

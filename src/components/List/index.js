@@ -9,7 +9,7 @@ const List = ({title, onPress, onDelete}) => (
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
     <TouchableOpacity style={styles.delete} onPress={onDelete}>
-      <Icon name="delete" size={24} />
+      <Icon name="delete" size={24} color="#B71C1C" />
     </TouchableOpacity>
   </View>
 )
