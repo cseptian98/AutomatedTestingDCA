@@ -2,23 +2,9 @@ import React, {useState} from 'react'
 import {View, TextInput, TouchableOpacity, Image} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styles from './InputList.styles'
-import axiosConfig from 'api/BaseConfig'
 
 const InputList = ({createList}) => {
   const [title, setTitle] = useState('')
-
-  // const createNewList = () => {
-  //   const onSuccess = ({data}) => {
-  //     console.log('debug success', data)
-  //     setTitle('')
-  //   }
-
-  //   const onFailure = error => {
-  //     console.log('debug error', error)
-  //   }
-
-  //   axiosConfig.post('api/TodoLists', {title}).then(onSuccess).catch(onFailure)
-  // }
 
   return (
     <View style={styles.container}>

@@ -1,27 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {View, TextInput, TouchableOpacity, Image} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import axiosConfig from 'api/BaseConfig'
 import styles from './InputItems.styles'
 
 const InputItem = ({createItem, listId}) => {
   const [title, setTitle] = useState('')
-
-  // const createNewItem = () => {
-  //   const onSuccess = ({data}) => {
-  //     console.log('debug success', data)
-  //     setTitle('')
-  //   }
-
-  //   const onFailure = error => {
-  //     console.log('debug error', error)
-  //   }
-
-  //   axiosConfig
-  //     .post('api/TodoItems', {listId, title})
-  //     .then(onSuccess)
-  //     .catch(onFailure)
-  // }
 
   return (
     <View style={styles.container}>

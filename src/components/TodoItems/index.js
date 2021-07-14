@@ -31,7 +31,7 @@ const TodoItems = () => {
     }
     getTodoItems()
     setRefetch(false)
-  }, [item])
+  }, [refetch])
 
   const deleteItems = item => {
     const onSuccess = () => {

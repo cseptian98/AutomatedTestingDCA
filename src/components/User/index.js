@@ -7,14 +7,18 @@ import styles from './User.styles'
 const User = ({navigation}) => {
   const [id, setId] = useState('')
 
+  const readIdFromStorage = async () => {
+    const value = await getData()
+    setId(value.user.id)
+  }
+
   useEffect(() => {
-    getData().then(value => {
-      setId(value.user.id)
-    })
-  })
+    readIdFromStorage()
+  }, [])
 
   const doLogout = () => {
     const onSuccess = () => {
+      console.log('User Deleted')
       deleteData()
       navigation.replace('Login')
     }

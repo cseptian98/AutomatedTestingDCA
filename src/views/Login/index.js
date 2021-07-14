@@ -16,17 +16,23 @@ import {StackActions} from '@react-navigation/native'
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('')
+  const [value, setValue] = useState(null)
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
+  const readFromStorage = async () => {
+    const data = await getData()
+    setValue(data)
+  }
+
   useEffect(() => {
-    getData().then(value => {
-      if (value !== null) {
-        setToken(value.token)
-        navigation.replace('Home')
-      }
-    })
+    readFromStorage()
   }, [])
+
+  if(value) {
+    setToken(value.token)
+    navigation.replace('Home')
+  }
 
   const doLogin = () => {
     setIsLoading(true)
