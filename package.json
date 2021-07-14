@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "clear_jest": "jest --clearCache",
     "test": "jest",
     "lint": "eslint .",
     "link": "react-native link",
@@ -32,6 +33,7 @@
     "@babel/core": "^7.14.5",
     "@babel/runtime": "^7.14.5",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@testing-library/react-native": "^7.2.0",
     "babel-jest": "^27.0.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^7.28.0",
@@ -40,6 +42,7 @@
     "react-test-renderer": "17.0.1"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "setupFiles": ["./jestSetupFile.js"]
   }
 }
