@@ -21,6 +21,7 @@
     "react": "~17.0.1",
     "react-native": "~0.63.4",
     "react-native-collapsible": "^1.6.0",
+    "react-native-dotenv": "^3.1.1",
     "react-native-expandable": "^1.0.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.2.0",
@@ -40,9 +41,5 @@
     "jest": "^27.0.4",
     "metro-react-native-babel-preset": "^0.66.0",
     "react-test-renderer": "17.0.1"
-  },
-  "jest": {
-    "preset": "react-native",
-    "setupFiles": ["./jestSetupFile.js"]
   }
 }
