@@ -1,6 +1,7 @@
 import * as axios from 'axios'
+import {BASE_URL} from '@env'
 
-const API_URL = 'http://10.0.2.2:5000/'
+const API_URL = BASE_URL
 
 const axiosConfig = axios.create({
   baseURL: API_URL,
@@ -12,7 +13,7 @@ const axiosConfig = axios.create({
 })
 
 export const setToken = token => {
-  axiosConfig.interceptors.request.use(function(config) {
+  axiosConfig.interceptors.request.use(function (config) {
     config.headers.Authorization = `Bearer ${token}`
     return config
   })
