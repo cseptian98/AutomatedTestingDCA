@@ -76,6 +76,7 @@ const Login = ({navigation}) => {
           placeholderTextColor="#000"
           keyboardType="email-address"
           onChangeText={email => setEmail(email)}
+          testID="email"
         />
       </View>
 
@@ -86,14 +87,15 @@ const Login = ({navigation}) => {
           placeholderTextColor="#000"
           secureTextEntry
           onChangeText={password => setPassword(password)}
+          testID="password"
         />
       </View>
       {isLoading ? (
         <ActivityIndicator size="large" color="#0D47A1" />
       ) : (
         <>
-          <TouchableOpacity style={styles.loginButton} onPress={doLogin}>
-            <Text style={styles.textButton}>Login</Text>
+          <TouchableOpacity style={styles.loginButton} onPress={doLogin} testID='btnLogin'>
+            <Text style={styles.textButton} testID='txtLogin'>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.registerButton} onPress={toRegister}>
             <Text style={styles.textButton2}>Create Account</Text>
