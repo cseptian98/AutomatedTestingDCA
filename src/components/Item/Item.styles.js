@@ -1,17 +1,27 @@
 import {StyleSheet} from 'react-native'
 
 const styles = StyleSheet.create({
+  itemContainer: {
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
   item: {
-    padding: 20,
-    borderRadius: 24,
-    marginVertical: 10,
-    marginHorizontal: 10,
+    flex: 1,
+    padding: 12,
+    marginLeft: 12,
+    marginRight: 20,
+    borderRadius: 10,
     backgroundColor: '#0D47A1',
   },
   title: {
     fontSize: 24,
     color: '#FFF',
   },
+  delete: {
+    marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 })
 
 export default styles

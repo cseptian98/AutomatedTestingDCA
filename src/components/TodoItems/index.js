@@ -1,8 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import {SafeAreaView, FlatList, Alert} from 'react-native'
+import {
+  SafeAreaView,
+  View,
+  Image,
+  Alert,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native'
 import styles from './TodoItems.styles'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import Item from 'components/Item'
-import InputItem from 'components/InputItem'
 import axiosConfig from 'api/BaseConfig'
 import {useRoute} from '@react-navigation/native'
 
@@ -10,6 +18,9 @@ const TodoItems = () => {
   const route = useRoute()
   const {ListId, url} = route.params
   const [item, setItem] = useState([])
+  const [title, setTitle] = useState('')
+  const [button, setButton] = useState('add')
+  const [selectedItem, setSelectedItem] = useState({})
   const [refetch, setRefetch] = useState(false)
 
   useEffect(() => {
@@ -31,9 +42,17 @@ const TodoItems = () => {
     }
     getTodoItems()
     setRefetch(false)
-  }, [refetch])
+  }, [refetch, ListId])
 
-  const deleteItems = item => {
+  const submit = () => {
+    if (button === 'add') {
+      createNewItem({ListId, title})
+    } else if (button === 'update') {
+      updateItem(selectedItem)
+    }
+  }
+
+  const deleteItems = data => {
     const onSuccess = () => {
       setRefetch(true)
       console.log('debug deleted')
@@ -45,12 +64,12 @@ const TodoItems = () => {
     }
 
     axiosConfig
-      .delete(`api/TodoItems/${item.id}`)
+      .delete(`api/TodoItems/${data.id}`)
       .then(onSuccess)
       .catch(onFailure)
   }
 
-  const createNewItem = ({listId, title}) => {
+  const createNewItem = ({ListId, title}) => {
     const onSuccess = ({data}) => {
       setRefetch(true)
       console.log('debug success', data)
@@ -62,9 +81,16 @@ const TodoItems = () => {
     }
 
     axiosConfig
-      .post('api/TodoItems', {listId, title})
+      .post('api/TodoItems', {listId: ListId, title})
       .then(onSuccess)
       .catch(onFailure)
+  }
+
+  const selectItem = item => {
+    console.log(item)
+    setSelectedItem(item)
+    setTitle(item.title)
+    setButton('update')
   }
 
   const renderItem = ({item}) => (
@@ -87,12 +113,54 @@ const TodoItems = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <InputItem createItem={createNewItem} listId={ListId} />
-      <FlatList
-        data={item}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
+      <View style={styles.itemContainer}>
+        <View>
+          <Image
+            style={styles.image}
+            source={require('assets/images/item.png')}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Add Todo Item..."
+            placeholderTextColor="#FFF"
+            value={title}
+            onChangeText={(value) => setTitle(value)}
+          />
+          <TouchableOpacity style={styles.button} onPress={submit}>
+            <Icon name={button} size={30} color="#FFF" />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <ScrollView>
+        {item.map(data => {
+          return (
+            <Item
+              key={data.id}
+              title={data.title}
+              testID="todoItem"
+              onUpdate={() => selectItem(data)}
+              onDelete={() =>
+                Alert.alert(
+                  'Delete Item',
+                  'Are you sure to delete this item?',
+                  [
+                    {
+                      text: 'No',
+                      onPress: () => console.log('Cancel'),
+                    },
+                    {
+                      text: 'Yes',
+                      onPress: () => deleteItems(data),
+                    },
+                  ],
+                )
+              }
+            />
+          )
+        })}
+      </ScrollView>
     </SafeAreaView>
   )
 }
