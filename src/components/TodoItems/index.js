@@ -26,8 +26,10 @@ const TodoItems = () => {
   useEffect(() => {
     async function getTodoItems() {
       const onSuccess = ({data}) => {
-        console.log('debug success', data)
+        setButton('add')
+        setTitle('')
         setItem(data.items)
+        console.log('debug success', data)
       }
 
       const onFailure = error => {
@@ -71,6 +73,7 @@ const TodoItems = () => {
 
   const createNewItem = ({ListId, title}) => {
     const onSuccess = ({data}) => {
+      setTitle('')
       setRefetch(true)
       console.log('debug success', data)
     }
@@ -86,11 +89,34 @@ const TodoItems = () => {
       .catch(onFailure)
   }
 
+  const updateItem = selectedItem => {
+    const onSuccess = ({data}) => {
+      setTitle('')
+      setRefetch(true)
+      setButton('add')
+      console.log('debug success', data)
+    }
+
+    const onFailure = error => {
+      setRefetch(true)
+      console.log('debug error', error)
+    }
+
+    axiosConfig
+      .put(`api/TodoItems/${selectedItem.id}`, {
+        id: selectedItem.id,
+        title: title,
+        done: true,
+      })
+      .then(onSuccess)
+      .catch(onFailure)
+  }
+
   const selectItem = item => {
-    console.log(item)
     setSelectedItem(item)
     setTitle(item.title)
     setButton('update')
+    console.log(item)
   }
 
   const renderItem = ({item}) => (

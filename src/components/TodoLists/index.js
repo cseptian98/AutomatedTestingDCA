@@ -26,8 +26,10 @@ const TodoLists = ({navigation: {navigate}}) => {
   useEffect(() => {
     async function getTodoLists() {
       const onSuccess = ({data}) => {
-        console.log('debug success', data)
+        setButton('add')
+        setTitle('')
         setList(data.lists)
+        console.log('debug success', data)
       }
 
       const onFailure = error => {
@@ -104,10 +106,10 @@ const TodoLists = ({navigation: {navigate}}) => {
   }
 
   const selectItem = item => {
-    console.log(item)
     setSelectedList(item)
     setTitle(item.title)
     setButton('update')
+    console.log(item)
   }
 
   const moveToItems = item => {
