@@ -10,6 +10,7 @@ import {
   Alert,
 } from 'react-native'
 import styles from './Login.styles'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {storeData, getData} from 'api/Local'
 import axiosConfig, {setToken} from 'api/BaseConfig'
 import {StackActions} from '@react-navigation/native'
@@ -19,6 +20,8 @@ const Login = ({navigation}) => {
   const [value, setValue] = useState(null)
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [showPassword, setShowPassword] = useState(true)
 
   const readFromStorage = async () => {
     const data = await getData()
@@ -29,13 +32,19 @@ const Login = ({navigation}) => {
     readFromStorage()
   }, [])
 
-  if(value) {
+  if (value) {
     setToken(value.token)
     navigation.replace('Home')
   }
 
   const doLogin = () => {
+    if (email.length > 0 && password.length > 0) {
+      setErrorMessage('Wrong username and password')
+    } else {
+      setErrorMessage('Email and password is required')
+    }
     setIsLoading(true)
+
     const onSuccess = ({data}) => {
       setIsLoading(false)
       storeData(data)
@@ -45,7 +54,7 @@ const Login = ({navigation}) => {
 
     const onFailure = data => {
       console.log('debug error', data)
-      Alert.alert('Login Error', 'Error Message', [
+      Alert.alert('Login Error', errorMessage, [
         {
           text: 'Close',
           onPress: () => setIsLoading(false),
@@ -64,6 +73,10 @@ const Login = ({navigation}) => {
     navigation.dispatch(movePage)
   }
 
+  const setIconPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={require('assets/images/login.png')} />
@@ -75,8 +88,9 @@ const Login = ({navigation}) => {
           placeholder="Email"
           placeholderTextColor="#000"
           keyboardType="email-address"
-          onChangeText={email => setEmail(email)}
-          testID="email"
+          value={email}
+          onChangeText={value => setEmail(value)}
+          testID="emailLogin"
         />
       </View>
 
@@ -85,17 +99,30 @@ const Login = ({navigation}) => {
           style={styles.textInput}
           placeholder="Password"
           placeholderTextColor="#000"
-          secureTextEntry
-          onChangeText={password => setPassword(password)}
-          testID="password"
+          secureTextEntry={showPassword}
+          value={password}
+          onChangeText={value => setPassword(value)}
+          testID="passwordLogin"
         />
+        <TouchableOpacity onPress={setIconPassword} style={styles.icon}>
+          {showPassword ? (
+            <Icon name='eye-off' size={24} color="#000" />
+          ) : (
+            <Icon name='eye' size={24} color="#000" />
+          )}
+        </TouchableOpacity>
       </View>
       {isLoading ? (
         <ActivityIndicator size="large" color="#0D47A1" />
       ) : (
         <>
-          <TouchableOpacity style={styles.loginButton} onPress={doLogin} testID='btnLogin'>
-            <Text style={styles.textButton} testID='txtLogin'>Login</Text>
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={doLogin}
+            testID="btnLogin">
+            <Text style={styles.textButton} testID="txtLogin">
+              Login
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.registerButton} onPress={toRegister}>
             <Text style={styles.textButton2}>Create Account</Text>

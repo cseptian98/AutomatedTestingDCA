@@ -11,6 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native'
 import styles from './Register.styles'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import axiosConfig from 'api/BaseConfig'
 import {StackActions} from '@react-navigation/routers'
 
@@ -18,7 +19,10 @@ const Register = ({navigation}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmationPassword, setConfirmPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(true)
+  const [showConfPassword, setShowConfPassword] = useState(true)
 
   const backAction = () => {
     const movePage = StackActions.pop(1)
@@ -34,6 +38,9 @@ const Register = ({navigation}) => {
   }, [])
 
   const doRegister = () => {
+    if(password !== confirmationPassword) {
+      setErrorMessage('Confirmation Password must same with Password')
+    }
     const value = {email, password, confirmationPassword}
     setIsLoading(true)
 
@@ -52,7 +59,7 @@ const Register = ({navigation}) => {
 
     const onFailure = error => {
       console.log('debug error', error)
-      Alert.alert('Register Error', 'Error Message', [
+      Alert.alert('Register Error', errorMessage, [
         {
           text: 'Close',
           onPress: () => setIsLoading(false),
@@ -64,6 +71,14 @@ const Register = ({navigation}) => {
       .post('api/Auth/register', value)
       .then(onSuccess)
       .catch(onFailure)
+  }
+
+  const setIconPassword = () => {
+    setShowPassword(!showPassword)
+  }
+
+  const setIconConfPassword = () => {
+    setShowConfPassword(!showConfPassword)
   }
 
   return (
@@ -80,7 +95,9 @@ const Register = ({navigation}) => {
           placeholder="Email"
           placeholderTextColor="#000"
           keyboardType="email-address"
-          onChangeText={email => setEmail(email)}
+          value={email}
+          testID='emailRegister'
+          onChangeText={(value) => setEmail(value)}
         />
       </View>
 
@@ -89,27 +106,45 @@ const Register = ({navigation}) => {
           style={styles.textInput}
           placeholder="Password"
           placeholderTextColor="#000"
-          secureTextEntry
-          onChangeText={password => setPassword(password)}
+          secureTextEntry={showPassword}
+          value={password}
+          testID='passwordRegister'
+          onChangeText={(value) => setPassword(value)}
         />
+        <TouchableOpacity onPress={setIconPassword} style={styles.icon}>
+          {showPassword ? (
+            <Icon name='eye-off' size={24} color="#000" />
+          ) : (
+            <Icon name='eye' size={24} color="#000" />
+          )}
+        </TouchableOpacity>
       </View>
 
       <View style={styles.inputView}>
         <TextInput
           style={styles.textInput}
-          placeholder="Confirm Password"
+          placeholder="Confirmation Password"
           placeholderTextColor="#000"
-          secureTextEntry
-          onChangeText={confPassword => setConfirmPassword(confPassword)}
+          secureTextEntry={showConfPassword}
+          value={confirmationPassword}
+          testID='confirmPassword'
+          onChangeText={(value) => setConfirmPassword(value)}
         />
+        <TouchableOpacity onPress={setIconConfPassword} style={styles.icon}>
+          {showConfPassword ? (
+            <Icon name='eye-off' size={24} color="#000" />
+          ) : (
+            <Icon name='eye' size={24} color="#000" />
+          )}
+        </TouchableOpacity>
       </View>
 
       {isLoading ? (
         <ActivityIndicator size="large" color="#0D47A1" />
       ) : (
         <>
-          <TouchableOpacity style={styles.registerButton} onPress={doRegister}>
-            <Text style={styles.registerText}>Register</Text>
+          <TouchableOpacity style={styles.registerButton} onPress={doRegister} testID='btnRegister'>
+            <Text style={styles.registerText} testID='txtRegister'>Register</Text>
           </TouchableOpacity>
         </>
       )}
