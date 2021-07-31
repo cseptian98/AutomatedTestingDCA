@@ -119,24 +119,6 @@ const TodoItems = () => {
     console.log(item)
   }
 
-  const renderItem = ({item}) => (
-    <Item
-      title={item.title}
-      onDelete={() =>
-        Alert.alert('Delete Item', 'Are you sure to delete this item?', [
-          {
-            text: 'No',
-            onPress: () => console.log('Cancel'),
-          },
-          {
-            text: 'Yes',
-            onPress: () => deleteItems(item),
-          },
-        ])
-      }
-    />
-  )
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.itemContainer}>

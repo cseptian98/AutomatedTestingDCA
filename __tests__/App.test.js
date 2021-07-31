@@ -1,20 +1,10 @@
-import {fireEvent, render} from '@testing-library/react-native'
-import React from 'react'
 import Login from 'views/Login'
-import AppNavigator from 'views/Navigator/AppNavigator'
+import renderer from 'react-test-renderer'
+import React from 'react'
 
 describe('Testing react navigation', () => {
-  test('renders correctly', async () => {
-    const component = (
-      <NavigationContainer>
-        <AppNavigator />
-      </NavigationContainer>
-    )
-    let root
-    act(() => {
-      root = create(component)
-    })
-
-    expect(root.getByTestId('txtLogin')).stringContaining('Login')
+  test('renders correctly', () => {
+    const tree = renderer.create(<Login />).toJSON();
+    expect(tree).toMatchSnapshot();
   })
 })
