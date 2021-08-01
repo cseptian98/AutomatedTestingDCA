@@ -14,6 +14,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {storeData, getData} from 'api/Local'
 import axiosConfig, {setToken} from 'api/BaseConfig'
 import {StackActions} from '@react-navigation/native'
+import {
+  TEST_ID_IMAGE_LOGIN,
+  TEST_ID_EMAIL_LOGIN,
+  TEST_ID_PASSWORD_LOGIN,
+  TEST_ID_BUTTON_LOGIN,
+  TEST_ID_BUTTON_CREATE_ACCOUNT,
+} from 'constants'
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('')
@@ -79,7 +86,11 @@ const Login = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require('assets/images/login.png')} />
+      <Image
+        style={styles.image}
+        source={require('assets/images/login.png')}
+        testID={TEST_ID_IMAGE_LOGIN}
+      />
 
       <StatusBar style="auto" />
       <View style={styles.inputView}>
@@ -90,7 +101,7 @@ const Login = ({navigation}) => {
           keyboardType="email-address"
           value={email}
           onChangeText={value => setEmail(value)}
-          testID="emailLogin"
+          testID={TEST_ID_EMAIL_LOGIN}
         />
       </View>
 
@@ -102,13 +113,13 @@ const Login = ({navigation}) => {
           secureTextEntry={showPassword}
           value={password}
           onChangeText={value => setPassword(value)}
-          testID="passwordLogin"
+          testID={TEST_ID_PASSWORD_LOGIN}
         />
         <TouchableOpacity onPress={setIconPassword} style={styles.icon}>
           {showPassword ? (
-            <Icon name='eye-off' size={24} color="#000" />
+            <Icon name="eye-off" size={24} color="#000" />
           ) : (
-            <Icon name='eye' size={24} color="#000" />
+            <Icon name="eye" size={24} color="#000" />
           )}
         </TouchableOpacity>
       </View>
@@ -119,12 +130,13 @@ const Login = ({navigation}) => {
           <TouchableOpacity
             style={styles.loginButton}
             onPress={doLogin}
-            testID="btnLogin">
-            <Text style={styles.textButton} testID="txtLogin">
-              Login
-            </Text>
+            testID={TEST_ID_BUTTON_LOGIN}>
+            <Text style={styles.textButton}>Login</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.registerButton} onPress={toRegister}>
+          <TouchableOpacity
+            style={styles.registerButton}
+            onPress={toRegister}
+            testID={TEST_ID_BUTTON_CREATE_ACCOUNT}>
             <Text style={styles.textButton2}>Create Account</Text>
           </TouchableOpacity>
         </>

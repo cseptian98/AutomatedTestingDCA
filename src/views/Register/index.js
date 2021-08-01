@@ -86,6 +86,7 @@ const Register = ({navigation}) => {
       <Image
         style={styles.image}
         source={require('assets/images/register.png')}
+        testID="imageRegister"
       />
 
       <StatusBar style="auto" />
@@ -144,7 +145,7 @@ const Register = ({navigation}) => {
       ) : (
         <>
           <TouchableOpacity style={styles.registerButton} onPress={doRegister} testID='btnRegister'>
-            <Text style={styles.registerText} testID='txtRegister'>Register</Text>
+            <Text style={styles.registerText}>Register</Text>
           </TouchableOpacity>
         </>
       )}
