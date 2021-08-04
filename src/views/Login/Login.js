@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
   Text,
   View,
@@ -13,7 +13,7 @@ import styles from './Login.styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {storeData, getData} from 'api/Local'
 import axiosConfig, {setToken} from 'api/BaseConfig'
-import {StackActions} from '@react-navigation/native'
+import {StackActions, useNavigation} from '@react-navigation/native'
 import {
   TEST_ID_IMAGE_LOGIN,
   TEST_ID_EMAIL_LOGIN,
@@ -22,7 +22,8 @@ import {
   TEST_ID_BUTTON_CREATE_ACCOUNT,
 } from 'constants'
 
-const Login = ({navigation}) => {
+const LoginScreen = () => {
+  const {replace, dispatch} = useNavigation()
   const [email, setEmail] = useState('')
   const [value, setValue] = useState(null)
   const [password, setPassword] = useState('')
@@ -41,27 +42,28 @@ const Login = ({navigation}) => {
 
   if (value) {
     setToken(value.token)
-    navigation.replace('Home')
+    replace('Home')
   }
 
   const doLogin = () => {
-    if (email.length > 0 && password.length > 0) {
-      setErrorMessage('Wrong username and password')
-    } else {
-      setErrorMessage('Email and password is required')
-    }
+    // if (email.length > 0 && password.length > 0) {
+    //   setErrorMessage('Wrong username and password')
+    // } else {
+    //   setErrorMessage('Email and password is required')
+    // }
     setIsLoading(true)
 
     const onSuccess = ({data}) => {
+      console.log(data)
       setIsLoading(false)
       storeData(data)
       setToken(data.token)
-      navigation.replace('Home')
+      replace('Home')
     }
 
     const onFailure = data => {
       console.log('debug error', data)
-      Alert.alert('Login Error', errorMessage, [
+      Alert.alert('Login Error', 'Error Message', [
         {
           text: 'Close',
           onPress: () => setIsLoading(false),
@@ -77,7 +79,7 @@ const Login = ({navigation}) => {
 
   const toRegister = () => {
     const movePage = StackActions.push('Register')
-    navigation.dispatch(movePage)
+    dispatch(movePage)
   }
 
   const setIconPassword = () => {
@@ -145,4 +147,4 @@ const Login = ({navigation}) => {
   )
 }
 
-export default Login
+export default LoginScreen

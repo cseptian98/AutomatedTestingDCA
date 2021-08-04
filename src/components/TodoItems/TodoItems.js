@@ -10,9 +10,15 @@ import {
 } from 'react-native'
 import styles from './TodoItems.styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import Item from 'components/Item'
+import Item from 'components/TodoItems/Item'
 import axiosConfig from 'api/BaseConfig'
 import {useRoute} from '@react-navigation/native'
+import {
+  TEST_ID_IMAGE_TODOITEM,
+  TEST_ID_TEXT_INPUT_ITEM,
+  TEST_ID_BUTTON_SUBMIT_ITEM,
+  TEST_ID_TODOITEM,
+} from 'constants'
 
 const TodoItems = () => {
   const route = useRoute()
@@ -126,6 +132,7 @@ const TodoItems = () => {
           <Image
             style={styles.image}
             source={require('assets/images/item.png')}
+            testID={TEST_ID_IMAGE_TODOITEM}
           />
         </View>
         <View style={styles.inputView}>
@@ -134,9 +141,13 @@ const TodoItems = () => {
             placeholder="Add Todo Item..."
             placeholderTextColor="#FFF"
             value={title}
-            onChangeText={(value) => setTitle(value)}
+            testID={TEST_ID_TEXT_INPUT_ITEM}
+            onChangeText={value => setTitle(value)}
           />
-          <TouchableOpacity style={styles.button} onPress={submit}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={submit}
+            testID={TEST_ID_BUTTON_SUBMIT_ITEM}>
             <Icon name={button} size={30} color="#FFF" />
           </TouchableOpacity>
         </View>
@@ -147,7 +158,7 @@ const TodoItems = () => {
             <Item
               key={data.id}
               title={data.title}
-              testID="todoItem"
+              testID={TEST_ID_TODOITEM}
               onUpdate={() => selectItem(data)}
               onDelete={() =>
                 Alert.alert(

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {SafeAreaView, FlatList, StyleSheet} from 'react-native'
-import List from 'components/Item'
+import List from 'components/TodoItems/Item'
 import axiosConfig from 'api/BaseConfig'
 
 const Weather = () => {

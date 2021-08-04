@@ -10,11 +10,18 @@ import {
 } from 'react-native'
 import styles from './TodoLists.styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import List from 'components/List'
+import List from 'components/TodoLists/List'
 import axiosConfig from 'api/BaseConfig'
-import {useRoute} from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import {
+  TEST_ID_IMAGE_TODOLIST,
+  TEST_ID_TEXT_INPUT_LIST,
+  TEST_ID_BUTTON_SUBMIT_LIST,
+  TEST_ID_TODOLIST,
+} from 'constants'
 
-const TodoLists = ({navigation: {navigate}}) => {
+const TodoLists = () => {
+  const {navigate} = useNavigation()
   const route = useRoute()
   const [list, setList] = useState([])
   const [title, setTitle] = useState('')
@@ -55,7 +62,7 @@ const TodoLists = ({navigation: {navigate}}) => {
     }
 
     axiosConfig
-      .delete(`api/TodoLists/${item.id}`)
+      .delete(`${url}/${item.id}`)
       .then(onSuccess)
       .catch(onFailure)
   }
@@ -80,7 +87,7 @@ const TodoLists = ({navigation: {navigate}}) => {
       console.log('debug error', error)
     }
 
-    axiosConfig.post('api/TodoLists', {title}).then(onSuccess).catch(onFailure)
+    axiosConfig.post(url, {title}).then(onSuccess).catch(onFailure)
   }
 
   const updateList = selectedList => {
@@ -97,7 +104,7 @@ const TodoLists = ({navigation: {navigate}}) => {
     }
 
     axiosConfig
-      .put(`api/TodoLists/${selectedList.id}`, {
+      .put(`${url}/${selectedList.id}`, {
         id: selectedList.id,
         title: title,
       })
@@ -125,6 +132,7 @@ const TodoLists = ({navigation: {navigate}}) => {
           <Image
             style={styles.image}
             source={require('assets/images/list.png')}
+            testID={TEST_ID_IMAGE_TODOLIST}
           />
         </View>
         <View style={styles.inputView}>
@@ -134,11 +142,11 @@ const TodoLists = ({navigation: {navigate}}) => {
             placeholderTextColor="#FFF"
             value={title}
             onChangeText={value => setTitle(value)}
-            testID="txtInputList"
+            testID={TEST_ID_TEXT_INPUT_LIST}
           />
           <TouchableOpacity
             style={styles.button}
-            testID="actTodoList"
+            testID={TEST_ID_BUTTON_SUBMIT_LIST}
             onPress={submit}>
             <Icon name={button} size={30} color="#FFF" />
           </TouchableOpacity>
@@ -150,7 +158,7 @@ const TodoLists = ({navigation: {navigate}}) => {
             <List
               key={item.id}
               title={item.title}
-              testID="todoList"
+              testID={TEST_ID_TODOLIST}
               onPress={() => moveToItems(item)}
               onUpdate={() => selectItem(item)}
               onDelete={() =>

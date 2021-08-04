@@ -1,13 +1,11 @@
 import React from 'react'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import TodoLists from 'components/TodoLists'
-import TodoItems from 'components/TodoItems'
-import User from 'components/User'
+import {TodoLists, TodoItems, User} from 'components'
 
 const Tab = createBottomTabNavigator()
 
-const Home = () => {
+const HomeScreen = () => {
   return (
     <Tab.Navigator
       initialRouteName="TodoList"
@@ -21,7 +19,7 @@ const Home = () => {
       <Tab.Screen
         name="TodoList"
         component={TodoLists}
-        initialParams={{ url: 'api/TodoLists' }}
+        initialParams={{url: 'api/TodoLists'}}
         options={{
           tabBarLabel: 'List',
           tabBarIcon: ({color, size}) => (
@@ -32,7 +30,7 @@ const Home = () => {
       <Tab.Screen
         name="TodoItems"
         component={TodoItems}
-        initialParams={{ url: 'api/TodoItems' }}
+        initialParams={{url: 'api/TodoItems'}}
         options={{
           tabBarLabel: 'Item',
           tabBarIcon: ({color, size}) => (
@@ -43,6 +41,7 @@ const Home = () => {
       <Tab.Screen
         name="User"
         component={User}
+        initialParams={{url: 'api/User'}}
         options={{
           tabBarLabel: 'User',
           tabBarIcon: ({color, size}) => (
@@ -54,4 +53,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomeScreen

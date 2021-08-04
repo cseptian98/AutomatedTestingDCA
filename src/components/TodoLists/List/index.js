@@ -1,26 +1,34 @@
 import React from 'react'
 import {TouchableOpacity, Text, View} from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import styles from './Item.styles'
+import styles from './List.styles'
+import {
+  TEST_ID_TITLE_TODOLIST,
+  TEST_ID_BUTTON_UPDATE_LIST,
+  TEST_ID_BUTTON_DELETE_LIST,
+} from 'constants'
 
-const Item = ({title, onDelete, onUpdate}) => (
-  <View style={styles.itemContainer}>
-    <View style={styles.item} testID="titleItem">
+const List = ({title, onPress, onDelete, onUpdate}) => (
+  <View style={styles.listContainer}>
+    <TouchableOpacity
+      style={styles.list}
+      onPress={onPress}
+      testID={TEST_ID_TITLE_TODOLIST}>
       <Text style={styles.title}>{title}</Text>
-    </View>
+    </TouchableOpacity>
     <TouchableOpacity
       style={styles.delete}
       onPress={onUpdate}
-      testID="btnUpdateItem">
+      testID={TEST_ID_BUTTON_UPDATE_LIST}>
       <Icon name="update" size={24} color="#B71C1C" />
     </TouchableOpacity>
     <TouchableOpacity
       style={styles.delete}
       onPress={onDelete}
-      testID="btnDeletItem">
+      testID={TEST_ID_BUTTON_DELETE_LIST}>
       <Icon name="delete" size={24} color="#B71C1C" />
     </TouchableOpacity>
   </View>
 )
 
-export default Item
+export default List

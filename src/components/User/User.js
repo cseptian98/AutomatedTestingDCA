@@ -3,9 +3,14 @@ import {View, TouchableOpacity, Text, Alert, Image} from 'react-native'
 import {deleteData, getData} from 'api/Local'
 import axiosConfig from 'api/BaseConfig'
 import styles from './User.styles'
+import {TEST_ID_IMAGE_USER, TEST_ID_BUTTON_LOGOUT} from 'constants'
+import {useNavigation, useRoute} from '@react-navigation/native'
 
-const User = ({navigation}) => {
+const User = () => {
+  const {replace} = useNavigation()
+  const route = useRoute()
   const [id, setId] = useState('')
+  const {url} = route.params
 
   const readIdFromStorage = async () => {
     const value = await getData()
@@ -20,14 +25,14 @@ const User = ({navigation}) => {
     const onSuccess = () => {
       console.log('User Deleted')
       deleteData()
-      navigation.replace('Login')
+      replace('Login')
     }
 
     const onFailure = error => {
       console.log('debug error', error)
     }
 
-    axiosConfig.delete(`api/User/${id}`).then(onSuccess).catch(onFailure)
+    axiosConfig.delete(`${url}/${id}`).then(onSuccess).catch(onFailure)
   }
 
   return (
@@ -35,9 +40,11 @@ const User = ({navigation}) => {
       <Image
         style={styles.image}
         source={require('assets/images/profil.png')}
+        testID={TEST_ID_IMAGE_USER}
       />
       <TouchableOpacity
         style={styles.deleteButton}
+        testID={TEST_ID_BUTTON_LOGOUT}
         onPress={() =>
           Alert.alert('Logout', 'Are you sure to Logout?', [
             {
