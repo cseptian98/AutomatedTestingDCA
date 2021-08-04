@@ -1,6 +1,6 @@
 import React from 'react'
 import {fireEvent, render} from '@testing-library/react-native'
-import Login from 'views/Login'
+import {LoginScreen} from 'views'
 import {
   TEST_ID_IMAGE_LOGIN,
   TEST_ID_EMAIL_LOGIN,
@@ -9,25 +9,29 @@ import {
 } from 'constants'
 
 let componentLogin
-const doLogin = jest.fn()
+let email
+let password
+let emailInput
+let passwordInput
+let buttonLogin
 
 describe('Login Components', () => {
   beforeEach(() => {
-    componentLogin = render(<Login doLogin={doLogin} />)
+    componentLogin = render(<LoginScreen />)
+
+    email = 'cseptian@gmail.com'
+    password = 'Auto@123'
+
+    emailInput = componentLogin.getByTestId(TEST_ID_EMAIL_LOGIN)
+    passwordInput = componentLogin.getByTestId(TEST_ID_PASSWORD_LOGIN)
+    buttonLogin = componentLogin.getByTestId(TEST_ID_BUTTON_LOGIN)
   })
 
   it('should show login screen', () => {
     expect(componentLogin.getByTestId(TEST_ID_IMAGE_LOGIN)).toBeTruthy()
   })
 
-  it('should changed form value', () => {
-    const email = 'cseptian@gmail.com'
-    const password = 'Auto@123'
-
-    const emailInput = componentLogin.getByTestId(TEST_ID_EMAIL_LOGIN)
-    const passwordInput = componentLogin.getByTestId(TEST_ID_PASSWORD_LOGIN)
-    const buttonLogin = componentLogin.getByTestId(TEST_ID_BUTTON_LOGIN)
-
+  it('should changed form login', () => {
     fireEvent.changeText(emailInput, email)
     expect(emailInput.props.value).toBe(email)
 
