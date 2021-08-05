@@ -74,14 +74,14 @@ const TodoItems = () => {
   }
 
   const createNewItem = ({ListId, title}) => {
-    const onSuccess = ({data}) => {
+    const onSuccess = () => {
       setTitle('')
       setRefetch(true)
     }
 
     const onFailure = error => {
-      setRefetch(true)
       console.log('Error :', error.response)
+      setRefetch(true)
     }
 
     axiosConfig
@@ -91,15 +91,15 @@ const TodoItems = () => {
   }
 
   const updateItem = selectedItem => {
-    const onSuccess = ({data}) => {
+    const onSuccess = () => {
       setTitle('')
       setRefetch(true)
       setButton('add')
     }
 
     const onFailure = error => {
-      setRefetch(true)
       console.log('Error :', error.response)
+      setRefetch(true)
     }
 
     axiosConfig

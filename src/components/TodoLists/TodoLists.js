@@ -74,7 +74,7 @@ const TodoLists = () => {
   }
 
   const createNewList = title => {
-    const onSuccess = ({data}) => {
+    const onSuccess = () => {
       setTitle('')
       setRefetch(true)
     }
@@ -88,7 +88,7 @@ const TodoLists = () => {
   }
 
   const updateList = selectedList => {
-    const onSuccess = ({data}) => {
+    const onSuccess = () => {
       setTitle('')
       setRefetch(true)
       setButton('add')

@@ -19,4 +19,20 @@ export const setToken = token => {
   })
 }
 
+axiosConfig.interceptors.request.use(request => {
+  console.log('Starting Request: ', request)
+  return request
+})
+
+axiosConfig.interceptors.response.use(
+  response => {
+    console.log('Response: ', response)
+    return response
+  },
+  error => {
+    console.log('Request error: ', error.response)
+    return Promise.reject(error)
+  },
+)
+
 export default axiosConfig
