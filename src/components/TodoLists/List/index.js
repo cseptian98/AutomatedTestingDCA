@@ -20,7 +20,7 @@ const List = ({title, onPress, onDelete, onUpdate}) => (
       style={styles.delete}
       onPress={onUpdate}
       testID={TEST_ID_BUTTON_UPDATE_LIST}>
-      <Icon name="update" size={24} color="#B71C1C" />
+      <Icon name="edit" size={24} color="#B71C1C" />
     </TouchableOpacity>
     <TouchableOpacity
       style={styles.delete}

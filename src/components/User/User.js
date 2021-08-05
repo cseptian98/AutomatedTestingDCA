@@ -23,7 +23,6 @@ const User = () => {
 
   const doLogout = () => {
     const onSuccess = () => {
-      console.log('User Deleted')
       deleteData()
       replace('Login')
     }

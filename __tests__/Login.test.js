@@ -37,8 +37,5 @@ describe('Login Components', () => {
 
     fireEvent.changeText(passwordInput, password)
     expect(passwordInput.props.value).toBe(password)
-
-    // fireEvent.press(buttonLogin)
-    // expect(doLogin).toHaveBeenCalledTimes(1)
   })
 })

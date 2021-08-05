@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "clear_jest": "jest --clearCache",
-    "test": "jest",
+    "clean": "cd android && gradlew clean && cd ..",
+    "test": "jest --forceExit --detectOpenHandles",
     "lint": "eslint .",
     "link": "react-native link",
     "uninstall": "adb uninstall com.automateddca"

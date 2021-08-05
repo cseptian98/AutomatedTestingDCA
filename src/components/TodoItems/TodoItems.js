@@ -12,7 +12,7 @@ import styles from './TodoItems.styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Item from 'components/TodoItems/Item'
 import axiosConfig from 'api/BaseConfig'
-import {useRoute} from '@react-navigation/native'
+import {StackActions, useNavigation, useRoute} from '@react-navigation/native'
 import {
   TEST_ID_IMAGE_TODOITEM,
   TEST_ID_TEXT_INPUT_ITEM,
@@ -22,6 +22,7 @@ import {
 
 const TodoItems = () => {
   const route = useRoute()
+  const {dispatch} = useNavigation()
   const {ListId, url} = route.params
   const [item, setItem] = useState([])
   const [title, setTitle] = useState('')
@@ -35,7 +36,6 @@ const TodoItems = () => {
         setButton('add')
         setTitle('')
         setItem(data.items)
-        console.log('debug success', data)
       }
 
       const onFailure = error => {
@@ -55,7 +55,7 @@ const TodoItems = () => {
   const submit = () => {
     if (button === 'add') {
       createNewItem({ListId, title})
-    } else if (button === 'update') {
+    } else if (button === 'edit') {
       updateItem(selectedItem)
     }
   }
@@ -63,34 +63,27 @@ const TodoItems = () => {
   const deleteItems = data => {
     const onSuccess = () => {
       setRefetch(true)
-      console.log('debug deleted')
     }
 
     const onFailure = error => {
       setRefetch(true)
-      console.log('debug error delete', error)
     }
 
-    axiosConfig
-      .delete(`api/TodoItems/${data.id}`)
-      .then(onSuccess)
-      .catch(onFailure)
+    axiosConfig.delete(`${url}/${data.id}`).then(onSuccess).catch(onFailure)
   }
 
   const createNewItem = ({ListId, title}) => {
     const onSuccess = ({data}) => {
       setTitle('')
       setRefetch(true)
-      console.log('debug success', data)
     }
 
     const onFailure = error => {
       setRefetch(true)
-      console.log('debug error', error)
     }
 
     axiosConfig
-      .post('api/TodoItems', {listId: ListId, title})
+      .post(`${url}`, {listId: ListId, title})
       .then(onSuccess)
       .catch(onFailure)
   }
@@ -100,16 +93,14 @@ const TodoItems = () => {
       setTitle('')
       setRefetch(true)
       setButton('add')
-      console.log('debug success', data)
     }
 
     const onFailure = error => {
       setRefetch(true)
-      console.log('debug error', error)
     }
 
     axiosConfig
-      .put(`api/TodoItems/${selectedItem.id}`, {
+      .put(`${url}/${selectedItem.id}`, {
         id: selectedItem.id,
         title: title,
         done: true,
@@ -121,8 +112,15 @@ const TodoItems = () => {
   const selectItem = item => {
     setSelectedItem(item)
     setTitle(item.title)
-    setButton('update')
-    console.log(item)
+    setButton('edit')
+  }
+
+  const formUpdate = items => {
+    const movePage = StackActions.push('FormUpdateItem', {
+      item: items,
+      url: 'api/TodoItems/UpdateItemDetails',
+    })
+    dispatch(movePage)
   }
 
   return (
@@ -159,6 +157,7 @@ const TodoItems = () => {
               key={data.id}
               title={data.title}
               testID={TEST_ID_TODOITEM}
+              onUpdateItem={() => formUpdate(data)}
               onUpdate={() => selectItem(data)}
               onDelete={() =>
                 Alert.alert(

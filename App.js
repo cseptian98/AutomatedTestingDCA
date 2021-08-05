@@ -4,6 +4,7 @@ import React from 'react'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import {HomeScreen, LoginScreen, RegisterScreen} from 'views'
+import FormUpdateItem from 'components/TodoItems/FormUpdateItem/FormUpdateItem'
 
 const Stack = createStackNavigator()
 
@@ -18,6 +19,11 @@ const App = () => {
           options={{title: 'Automated Testing'}}
         />
         <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen
+          name="FormUpdateItem"
+          component={FormUpdateItem}
+          options={{title: 'Form Update Item'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )

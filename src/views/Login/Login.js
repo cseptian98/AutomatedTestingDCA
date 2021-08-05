@@ -46,23 +46,22 @@ const LoginScreen = () => {
   }
 
   const doLogin = () => {
-    // if (email.length > 0 && password.length > 0) {
-    //   setErrorMessage('Wrong username and password')
-    // } else {
-    //   setErrorMessage('Email and password is required')
-    // }
+    if (email.length > 0 && password.length > 0) {
+      setErrorMessage('Wrong username and password')
+    } else {
+      setErrorMessage('Email and password is required')
+    }
     setIsLoading(true)
 
     const onSuccess = ({data}) => {
-      console.log(data)
       setIsLoading(false)
       storeData(data)
       setToken(data.token)
       replace('Home')
     }
 
-    const onFailure = data => {
-      console.log('debug error', data)
+    const onFailure = error => {
+      console.log('error', error)
       Alert.alert('Login Error', 'Error Message', [
         {
           text: 'Close',
@@ -78,7 +77,7 @@ const LoginScreen = () => {
   }
 
   const toRegister = () => {
-    const movePage = StackActions.push('Register')
+    const movePage = StackActions.push('Register', {url: 'api/Auth/register'})
     dispatch(movePage)
   }
 

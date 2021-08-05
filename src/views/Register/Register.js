@@ -13,7 +13,7 @@ import {
 import styles from './Register.styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import axiosConfig from 'api/BaseConfig'
-import {StackActions, useNavigation} from '@react-navigation/native'
+import {StackActions, useNavigation, useRoute} from '@react-navigation/native'
 import {
   TEST_ID_IMAGE_REGISTER,
   TEST_ID_EMAIL_REGISTER,
@@ -23,6 +23,8 @@ import {
 } from 'constants'
 
 const RegisterScreen = () => {
+  const route = useRoute()
+  const {url} = route.params
   const {replace, dispatch} = useNavigation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -66,7 +68,7 @@ const RegisterScreen = () => {
     }
 
     const onFailure = error => {
-      console.log('debug error', error)
+      console.log('Error :', error)
       Alert.alert('Register Error', errorMessage, [
         {
           text: 'Close',
@@ -76,7 +78,7 @@ const RegisterScreen = () => {
     }
 
     axiosConfig
-      .post('api/Auth/register', value)
+      .post(url, value)
       .then(onSuccess)
       .catch(onFailure)
   }

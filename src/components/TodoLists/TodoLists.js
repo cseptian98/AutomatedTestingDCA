@@ -36,7 +36,6 @@ const TodoLists = () => {
         setButton('add')
         setTitle('')
         setList(data.lists)
-        console.log('debug success', data)
       }
 
       const onFailure = error => {
@@ -53,7 +52,6 @@ const TodoLists = () => {
   const deleteList = item => {
     const onSuccess = () => {
       setRefetch(true)
-      console.log('debug deleted')
     }
 
     const onFailure = error => {
@@ -70,7 +68,7 @@ const TodoLists = () => {
   const submit = () => {
     if (button === 'add') {
       createNewList(title)
-    } else if (button === 'update') {
+    } else if (button === 'edit') {
       updateList(selectedList)
     }
   }
@@ -79,12 +77,10 @@ const TodoLists = () => {
     const onSuccess = ({data}) => {
       setTitle('')
       setRefetch(true)
-      console.log('debug success', data)
     }
 
     const onFailure = error => {
       setRefetch(true)
-      console.log('debug error', error)
     }
 
     axiosConfig.post(url, {title}).then(onSuccess).catch(onFailure)
@@ -95,12 +91,10 @@ const TodoLists = () => {
       setTitle('')
       setRefetch(true)
       setButton('add')
-      console.log('debug success', data)
     }
 
     const onFailure = error => {
       setRefetch(true)
-      console.log('debug error', error)
     }
 
     axiosConfig
@@ -115,8 +109,7 @@ const TodoLists = () => {
   const selectItem = item => {
     setSelectedList(item)
     setTitle(item.title)
-    setButton('update')
-    console.log(item)
+    setButton('edit')
   }
 
   const moveToItems = item => {
