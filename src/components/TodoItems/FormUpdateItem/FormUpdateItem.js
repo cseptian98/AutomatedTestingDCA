@@ -22,12 +22,9 @@ import {
 const FormUpdateItem = () => {
   const route = useRoute()
   const {url, item} = route.params
-  const {replace, dispatch} = useNavigation()
+  const {navigate, dispatch} = useNavigation()
   const [isLoading, setIsLoading] = useState(false)
   const [note, setNote] = useState('')
-
-  console.log('debug', item)
-  console.log('debug', url)
 
   const backAction = () => {
     const movePage = StackActions.pop(1)
@@ -48,7 +45,7 @@ const FormUpdateItem = () => {
     const onSuccess = () => {
       const updateItemSuccess = () => {
         setIsLoading(false)
-        replace('TodoItems')
+        navigate('TodoItems')
       }
       Alert.alert('Update Item Success', 'Success', [
         {
@@ -59,7 +56,7 @@ const FormUpdateItem = () => {
     }
 
     const onFailure = error => {
-      console.log('Error :', error)
+      console.log('Error :', error.response)
       Alert.alert('Update Item Error', 'Error', [
         {
           text: 'Close',
@@ -69,12 +66,16 @@ const FormUpdateItem = () => {
     }
 
     axiosConfig
-      .put(`${url}/${item.id}`, {
-        id: item.id,
-        listId: item.listId,
-        priority: item.priority,
-        note: note,
-      })
+      .put(
+        url,
+        {
+          id: item.id,
+          listId: item.listId,
+          priority: item.priority,
+          note: note,
+        },
+        {params: {id: item.id}},
+      )
       .then(onSuccess)
       .catch(onFailure)
   }
