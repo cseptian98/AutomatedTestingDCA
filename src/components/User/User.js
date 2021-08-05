@@ -28,7 +28,7 @@ const User = () => {
     }
 
     const onFailure = error => {
-      console.log('debug error', error)
+      console.log('Error :', error.response)
     }
 
     axiosConfig.delete(`${url}/${id}`).then(onSuccess).catch(onFailure)

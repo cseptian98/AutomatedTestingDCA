@@ -28,7 +28,6 @@ const LoginScreen = () => {
   const [value, setValue] = useState(null)
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
   const [showPassword, setShowPassword] = useState(true)
 
   const readFromStorage = async () => {
@@ -46,11 +45,6 @@ const LoginScreen = () => {
   }
 
   const doLogin = () => {
-    if (email.length > 0 && password.length > 0) {
-      setErrorMessage('Wrong username and password')
-    } else {
-      setErrorMessage('Email and password is required')
-    }
     setIsLoading(true)
 
     const onSuccess = ({data}) => {
@@ -61,7 +55,7 @@ const LoginScreen = () => {
     }
 
     const onFailure = error => {
-      console.log('error', error)
+      console.log('Error :', error.response)
       Alert.alert('Login Error', 'Error Message', [
         {
           text: 'Close',

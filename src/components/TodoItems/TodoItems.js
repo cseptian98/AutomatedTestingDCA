@@ -39,7 +39,7 @@ const TodoItems = () => {
       }
 
       const onFailure = error => {
-        console.log('debug error', error)
+        console.log('Error :', error.response)
       }
 
       const value = await axiosConfig
@@ -67,6 +67,7 @@ const TodoItems = () => {
 
     const onFailure = error => {
       setRefetch(true)
+      console.log('Error :', error.response)
     }
 
     axiosConfig.delete(`${url}/${data.id}`).then(onSuccess).catch(onFailure)
@@ -80,6 +81,7 @@ const TodoItems = () => {
 
     const onFailure = error => {
       setRefetch(true)
+      console.log('Error :', error.response)
     }
 
     axiosConfig
@@ -97,6 +99,7 @@ const TodoItems = () => {
 
     const onFailure = error => {
       setRefetch(true)
+      console.log('Error :', error.response)
     }
 
     axiosConfig

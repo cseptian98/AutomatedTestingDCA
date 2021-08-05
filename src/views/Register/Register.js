@@ -48,9 +48,6 @@ const RegisterScreen = () => {
   }, [])
 
   const doRegister = () => {
-    if (password !== confirmationPassword) {
-      setErrorMessage('Confirmation Password must same with Password')
-    }
     const value = {email, password, confirmationPassword}
     setIsLoading(true)
 
@@ -68,8 +65,8 @@ const RegisterScreen = () => {
     }
 
     const onFailure = error => {
-      console.log('Error :', error)
-      Alert.alert('Register Error', errorMessage, [
+      console.log('Error :', error.response)
+      Alert.alert('Error', 'Register Error', [
         {
           text: 'Close',
           onPress: () => setIsLoading(false),
