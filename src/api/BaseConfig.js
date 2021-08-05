@@ -30,7 +30,7 @@ axiosConfig.interceptors.response.use(
     return response
   },
   error => {
-    console.log('Request error: ', error.response)
+    console.log('Request Error: ', error.response)
     return Promise.reject(error)
   },
 )

@@ -38,11 +38,7 @@ const TodoLists = () => {
         setList(data.lists)
       }
 
-      const onFailure = error => {
-        console.log('Error :', error.response)
-      }
-
-      const value = await axiosConfig.get(url).then(onSuccess).catch(onFailure)
+      const value = await axiosConfig.get(url).then(onSuccess)
       return value
     }
     getTodoLists()
@@ -54,9 +50,8 @@ const TodoLists = () => {
       setRefetch(true)
     }
 
-    const onFailure = error => {
+    const onFailure = () => {
       setRefetch(true)
-      console.log('Error :', error.response)
     }
 
     axiosConfig
@@ -79,8 +74,7 @@ const TodoLists = () => {
       setRefetch(true)
     }
 
-    const onFailure = error => {
-      console.log('Error :', error.response)
+    const onFailure = () => {
       setRefetch(true)
     }
 
@@ -94,8 +88,7 @@ const TodoLists = () => {
       setButton('add')
     }
 
-    const onFailure = error => {
-      console.log('Error :', error.response)
+    const onFailure = () => {
       setRefetch(true)
     }
 

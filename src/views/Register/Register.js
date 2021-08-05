@@ -55,7 +55,7 @@ const RegisterScreen = () => {
         setIsLoading(false)
         replace('Login')
       }
-      Alert.alert('Register Success', 'Your Account Succesfully Registered', [
+      Alert.alert('Success', 'Your Account Succesfully Registered', [
         {
           text: 'Oke',
           onPress: () => registerSuccess(),
@@ -63,8 +63,7 @@ const RegisterScreen = () => {
       ])
     }
 
-    const onFailure = error => {
-      console.log('Error :', error.response)
+    const onFailure = () => {
       Alert.alert('Error', 'Register Error', [
         {
           text: 'Close',

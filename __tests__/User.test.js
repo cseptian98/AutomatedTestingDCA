@@ -1,5 +1,5 @@
 import React from 'react'
-import {fireEvent, render} from '@testing-library/react-native'
+import {render} from '@testing-library/react-native'
 import {User} from 'components'
 import {TEST_ID_BUTTON_LOGOUT, TEST_ID_IMAGE_USER} from 'constants'
 

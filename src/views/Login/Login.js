@@ -54,9 +54,8 @@ const LoginScreen = () => {
       replace('Home')
     }
 
-    const onFailure = error => {
-      console.log('Error :', error.response)
-      Alert.alert('Login Error', 'Error Message', [
+    const onFailure = () => {
+      Alert.alert('Error', 'Login Error', [
         {
           text: 'Close',
           onPress: () => setIsLoading(false),

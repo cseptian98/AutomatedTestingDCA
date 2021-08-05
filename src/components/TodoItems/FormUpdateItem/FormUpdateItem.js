@@ -47,7 +47,7 @@ const FormUpdateItem = () => {
         setIsLoading(false)
         navigate('TodoItems')
       }
-      Alert.alert('Update Item Success', 'Success', [
+      Alert.alert('Success', 'Update Item Success', [
         {
           text: 'Oke',
           onPress: () => updateItemSuccess(),
@@ -55,9 +55,8 @@ const FormUpdateItem = () => {
       ])
     }
 
-    const onFailure = error => {
-      console.log('Error :', error.response)
-      Alert.alert('Update Item Error', 'Error', [
+    const onFailure = () => {
+      Alert.alert('Error', 'Error Update Item', [
         {
           text: 'Close',
           onPress: () => setIsLoading(false),

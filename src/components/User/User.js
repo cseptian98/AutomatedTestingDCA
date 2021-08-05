@@ -27,11 +27,7 @@ const User = () => {
       replace('Login')
     }
 
-    const onFailure = error => {
-      console.log('Error :', error.response)
-    }
-
-    axiosConfig.delete(`${url}/${id}`).then(onSuccess).catch(onFailure)
+    axiosConfig.delete(`${url}/${id}`).then(onSuccess)
   }
 
   return (
