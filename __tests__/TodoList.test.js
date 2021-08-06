@@ -1,5 +1,5 @@
 import React from 'react'
-import {fireEvent, render} from '@testing-library/react-native'
+import {fireEvent, render, waitFor} from '@testing-library/react-native'
 import {TodoLists} from 'components'
 import {
   TEST_ID_IMAGE_TODOLIST,
@@ -11,10 +11,14 @@ let todoList
 let componentTodoLists
 let inputList
 let buttonSubmitList
+const params = {url: 'api/TodoLists'}
+const navigate = jest.fn()
 
 describe('Todolists Screen', () => {
   beforeEach(() => {
-    componentTodoLists = render(<TodoLists />)
+    componentTodoLists = render(
+      <TodoLists route={{params}} navigation={{navigate}} />,
+    )
 
     todoList = 'Running'
 
@@ -28,8 +32,10 @@ describe('Todolists Screen', () => {
     expect(componentTodoLists.getByTestId(TEST_ID_IMAGE_TODOLIST)).toBeTruthy()
   })
 
-  it('should change text input value', () => {
-    fireEvent.changeText(inputList, todoList)
+  it('should change text input value', async () => {
+    await waitFor(() => {
+      fireEvent.changeText(inputList, todoList)
+    })
     expect(inputList.props.value).toBe(todoList)
-  });
+  })
 })

@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  registerText: {
+  buttonText: {
     color: '#FFF',
     fontSize: 16,
   },
-  registerButton: {
+  updateButton: {
     height: 50,
     width: '90%',
     marginTop: 20,

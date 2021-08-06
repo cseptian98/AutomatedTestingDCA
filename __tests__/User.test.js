@@ -4,10 +4,11 @@ import {User} from 'components'
 import {TEST_ID_BUTTON_LOGOUT, TEST_ID_IMAGE_USER} from 'constants'
 
 let componentUser
+const params = {url: 'api/User'}
 
 describe('User Screen', () => {
   beforeEach(() => {
-    componentUser = render(<User />)
+    componentUser = render(<User route={{params}} />)
 
     buttonLogin = componentUser.getByTestId(TEST_ID_BUTTON_LOGOUT)
   })

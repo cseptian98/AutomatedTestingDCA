@@ -12,7 +12,6 @@ import styles from './TodoLists.styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import List from 'components/TodoLists/List'
 import axiosConfig from 'api/BaseConfig'
-import { useNavigation, useRoute } from '@react-navigation/native'
 import {
   TEST_ID_IMAGE_TODOLIST,
   TEST_ID_TEXT_INPUT_LIST,
@@ -20,9 +19,7 @@ import {
   TEST_ID_TODOLIST,
 } from 'constants'
 
-const TodoLists = () => {
-  const {navigate} = useNavigation()
-  const route = useRoute()
+const TodoLists = ({route, navigation}) => {
   const [list, setList] = useState([])
   const [title, setTitle] = useState('')
   const [refetch, setRefetch] = useState(false)
@@ -108,7 +105,7 @@ const TodoLists = () => {
   }
 
   const moveToItems = item => {
-    navigate('TodoItems', {
+    navigation.navigate('TodoItems', {
       ListId: item.id,
     })
   }

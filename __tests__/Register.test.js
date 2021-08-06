@@ -1,5 +1,5 @@
 import React from 'react'
-import {fireEvent, render} from '@testing-library/react-native'
+import {fireEvent, render, waitFor} from '@testing-library/react-native'
 import {RegisterScreen} from 'views'
 import {
   TEST_ID_IMAGE_REGISTER,
@@ -15,10 +15,14 @@ let confirmPassword
 let emailInput
 let passwordInput
 let confirmPasswordInput
+const replace = jest.fn()
+const params = {url: 'api/Auth/register'}
 
 describe('Register Screen', () => {
   beforeEach(() => {
-    componentRegister = render(<RegisterScreen />)
+    componentRegister = render(
+      <RegisterScreen route={{params}} navigation={{replace}} />,
+    )
 
     email = 'cseptian@gmail.com'
     password = 'Auto@123'
@@ -35,14 +39,14 @@ describe('Register Screen', () => {
     expect(componentRegister.getByTestId(TEST_ID_IMAGE_REGISTER)).toBeTruthy()
   })
 
-  it('should change form register', () => {
-    fireEvent.changeText(emailInput, email)
+  it('should change form register', async () => {
+    await waitFor(() => {
+      fireEvent.changeText(emailInput, email)
+      fireEvent.changeText(passwordInput, password)
+      fireEvent.changeText(confirmPasswordInput, confirmPassword)
+    })
     expect(emailInput.props.value).toBe(email)
-
-    fireEvent.changeText(passwordInput, password)
     expect(passwordInput.props.value).toBe(password)
-
-    fireEvent.changeText(confirmPasswordInput, confirmPassword)
     expect(confirmPasswordInput.props.value).toBe(confirmPassword)
   })
 })

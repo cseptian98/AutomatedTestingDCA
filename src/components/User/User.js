@@ -4,11 +4,8 @@ import {deleteData, getData} from 'api/Local'
 import axiosConfig from 'api/BaseConfig'
 import styles from './User.styles'
 import {TEST_ID_IMAGE_USER, TEST_ID_BUTTON_LOGOUT} from 'constants'
-import {useNavigation, useRoute} from '@react-navigation/native'
 
-const User = () => {
-  const {replace} = useNavigation()
-  const route = useRoute()
+const User = ({route, navigation}) => {
   const [id, setId] = useState('')
   const {url} = route.params
 
@@ -24,7 +21,7 @@ const User = () => {
   const doLogout = () => {
     const onSuccess = () => {
       deleteData()
-      replace('Login')
+      navigation.replace('Login')
     }
 
     axiosConfig.delete(`${url}/${id}`).then(onSuccess)

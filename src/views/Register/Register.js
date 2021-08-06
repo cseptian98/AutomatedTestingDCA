@@ -13,7 +13,7 @@ import {
 import styles from './Register.styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import axiosConfig from 'api/BaseConfig'
-import {StackActions, useNavigation, useRoute} from '@react-navigation/native'
+import {StackActions} from '@react-navigation/native'
 import {
   TEST_ID_IMAGE_REGISTER,
   TEST_ID_EMAIL_REGISTER,
@@ -22,10 +22,8 @@ import {
   TEST_ID_BUTTON_REGISTER,
 } from 'constants'
 
-const RegisterScreen = () => {
-  const route = useRoute()
+const RegisterScreen = ({route, navigation}) => {
   const {url} = route.params
-  const {replace, dispatch} = useNavigation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmationPassword, setConfirmPassword] = useState('')
@@ -35,7 +33,7 @@ const RegisterScreen = () => {
 
   const backAction = () => {
     const movePage = StackActions.pop(1)
-    dispatch(movePage)
+    navigation.dispatch(movePage)
     return true
   }
 
@@ -53,7 +51,7 @@ const RegisterScreen = () => {
     const onSuccess = () => {
       const registerSuccess = () => {
         setIsLoading(false)
-        replace('Login')
+        navigation.replace('Login')
       }
       Alert.alert('Success', 'Your Account Succesfully Registered', [
         {
@@ -72,10 +70,7 @@ const RegisterScreen = () => {
       ])
     }
 
-    axiosConfig
-      .post(url, value)
-      .then(onSuccess)
-      .catch(onFailure)
+    axiosConfig.post(url, value).then(onSuccess).catch(onFailure)
   }
 
   const setIconPassword = () => {

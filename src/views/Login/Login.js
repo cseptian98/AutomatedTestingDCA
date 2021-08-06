@@ -22,8 +22,7 @@ import {
   TEST_ID_BUTTON_CREATE_ACCOUNT,
 } from 'constants'
 
-const LoginScreen = () => {
-  const {replace, dispatch} = useNavigation()
+const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('')
   const [value, setValue] = useState(null)
   const [password, setPassword] = useState('')
@@ -41,7 +40,7 @@ const LoginScreen = () => {
 
   if (value) {
     setToken(value.token)
-    replace('Home')
+    navigation.replace('Home')
   }
 
   const doLogin = () => {
@@ -51,7 +50,7 @@ const LoginScreen = () => {
       setIsLoading(false)
       storeData(data)
       setToken(data.token)
-      replace('Home')
+      navigation.replace('Home')
     }
 
     const onFailure = () => {
@@ -71,7 +70,7 @@ const LoginScreen = () => {
 
   const toRegister = () => {
     const movePage = StackActions.push('Register', {url: 'api/Auth/register'})
-    dispatch(movePage)
+    navigation.dispatch(movePage)
   }
 
   const setIconPassword = () => {

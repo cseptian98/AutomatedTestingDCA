@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {
   Text,
   View,
@@ -6,38 +6,34 @@ import {
   TextInput,
   TouchableOpacity,
   StatusBar,
-  BackHandler,
   Alert,
   ActivityIndicator,
 } from 'react-native'
 import styles from './FormUpdateItem.style'
 import axiosConfig from 'api/BaseConfig'
-import {StackActions, useNavigation, useRoute} from '@react-navigation/native'
 import {
   TEST_ID_IMAGE_UPDATE_ITEM,
   TEST_ID_BUTTON_UPDATE_DETAIL,
   TEST_ID_NOTES_ITEM,
 } from 'constants'
 
-const FormUpdateItem = () => {
-  const route = useRoute()
+const FormUpdateItem = ({route, navigation}) => {
   const {url, item} = route.params
-  const {navigate, dispatch} = useNavigation()
   const [isLoading, setIsLoading] = useState(false)
   const [note, setNote] = useState('')
 
-  const backAction = () => {
-    const movePage = StackActions.pop(1)
-    dispatch(movePage)
-    return true
-  }
+  // const backAction = () => {
+  //   const movePage = StackActions.pop(1)
+  //   navigation.dispatch(movePage)
+  //   return true
+  // }
 
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', backAction)
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', backAction)
-    }
-  }, [])
+  // useEffect(() => {
+  //   BackHandler.addEventListener('hardwareBackPress', backAction)
+  //   return () => {
+  //     BackHandler.removeEventListener('hardwareBackPress', backAction)
+  //   }
+  // }, [])
 
   const updateItem = () => {
     setIsLoading(true)
@@ -45,7 +41,7 @@ const FormUpdateItem = () => {
     const onSuccess = () => {
       const updateItemSuccess = () => {
         setIsLoading(false)
-        navigate('TodoItems')
+        navigation.navigate('TodoItems')
       }
       Alert.alert('Success', 'Update Item Success', [
         {
@@ -93,7 +89,6 @@ const FormUpdateItem = () => {
           style={styles.textInput}
           placeholder="Note"
           placeholderTextColor="#000"
-          keyboardType="email-address"
           value={note}
           testID={TEST_ID_NOTES_ITEM}
           onChangeText={value => setNote(value)}
@@ -105,10 +100,10 @@ const FormUpdateItem = () => {
       ) : (
         <>
           <TouchableOpacity
-            style={styles.registerButton}
+            style={styles.updateButton}
             onPress={updateItem}
             testID={TEST_ID_BUTTON_UPDATE_DETAIL}>
-            <Text style={styles.registerText}>Update Item</Text>
+            <Text style={styles.buttonText}>Update Item</Text>
           </TouchableOpacity>
         </>
       )}

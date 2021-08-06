@@ -12,7 +12,7 @@ import styles from './TodoItems.styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Item from 'components/TodoItems/Item'
 import axiosConfig from 'api/BaseConfig'
-import {StackActions, useNavigation, useRoute} from '@react-navigation/native'
+import {StackActions} from '@react-navigation/native'
 import {
   TEST_ID_IMAGE_TODOITEM,
   TEST_ID_TEXT_INPUT_ITEM,
@@ -20,9 +20,7 @@ import {
   TEST_ID_TODOITEM,
 } from 'constants'
 
-const TodoItems = () => {
-  const route = useRoute()
-  const {dispatch} = useNavigation()
+const TodoItems = ({route, navigation}) => {
   const {ListId, url} = route.params
   const [item, setItem] = useState([])
   const [title, setTitle] = useState('')
@@ -119,7 +117,7 @@ const TodoItems = () => {
       item: items,
       url: 'api/TodoItems/UpdateItemDetails',
     })
-    dispatch(movePage)
+    navigation.dispatch(movePage)
   }
 
   return (

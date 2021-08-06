@@ -1,5 +1,5 @@
 import React from 'react'
-import {fireEvent, render} from '@testing-library/react-native'
+import {fireEvent, render, waitFor} from '@testing-library/react-native'
 import {TodoItems} from 'components'
 import {
   TEST_ID_IMAGE_TODOITEM,
@@ -11,10 +11,12 @@ let todoItem
 let componentTodoItems
 let inputItem
 let buttonSubmitItem
+const params = {url: 'api/TodoItems'}
+const dispatch = jest.fn()
 
 describe('TodoItems screen', () => {
   beforeEach(() => {
-    componentTodoItems = render(<TodoItems />)
+    componentTodoItems = render(<TodoItems route={{params}} navigation={{dispatch}}/>)
 
     todoItem = 'Shoes'
 
@@ -28,8 +30,10 @@ describe('TodoItems screen', () => {
     expect(componentTodoItems.getByTestId(TEST_ID_IMAGE_TODOITEM)).toBeTruthy()
   })
 
-  it('should change text input value', () => {
-    fireEvent.changeText(inputItem, todoItem)
+  it('should change text input value', async () => {
+    await waitFor(() => {
+      fireEvent.changeText(inputItem, todoItem)
+    })
     expect(inputItem.props.value).toBe(todoItem)
   })
 })
