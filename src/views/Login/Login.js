@@ -13,7 +13,7 @@ import styles from './Login.styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {storeData, getData} from 'api/Local'
 import axiosConfig, {setToken} from 'api/BaseConfig'
-import {StackActions, useNavigation} from '@react-navigation/native'
+import {StackActions} from '@react-navigation/native'
 import {
   TEST_ID_IMAGE_LOGIN,
   TEST_ID_EMAIL_LOGIN,

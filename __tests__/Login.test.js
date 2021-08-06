@@ -31,7 +31,12 @@ describe('Login Components', () => {
     buttonLogin = componentLogin.getByTestId(TEST_ID_BUTTON_LOGIN)
     buttonCreate = componentLogin.getByTestId(TEST_ID_BUTTON_CREATE_ACCOUNT)
   })
-
+  it('renders correctly', async () => {
+    await waitFor(() => {
+      const screen = componentLogin.toJSON()
+      expect(screen).toMatchSnapshot()
+    })
+  })
   it('should show login screen', () => {
     expect(componentLogin.getByTestId(TEST_ID_IMAGE_LOGIN)).toBeTruthy()
   })

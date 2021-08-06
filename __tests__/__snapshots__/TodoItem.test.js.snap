@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoItems screen renders correctly 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginTop": 10,
+      }
+    }
+  >
+    <View>
+      <Image
+        source={
+          Object {
+            "testUri": "../../../src/assets/images/item.png",
+          }
+        }
+        style={
+          Object {
+            "alignItems": "center",
+            "height": 120,
+            "justifyContent": "center",
+            "width": 160,
+          }
+        }
+        testID="TEST_ID_IMAGE_TODOITEM"
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderRadius": 10,
+          "flexDirection": "column",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        onChangeText={[Function]}
+        placeholder="Add Todo Item..."
+        placeholderTextColor="#FFF"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "backgroundColor": "#0D47A1",
+            "borderRadius": 10,
+            "color": "#FFF",
+            "marginBottom": 10,
+            "marginLeft": 16,
+            "padding": 10,
+            "width": 200,
+          }
+        }
+        testID="TEST_ID_TEXT_INPUT_ITEM"
+        underlineColorAndroid="transparent"
+        value=""
+      />
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#0D47A1",
+            "borderRadius": 10,
+            "justifyContent": "center",
+            "marginBottom": 10,
+            "marginLeft": 16,
+            "opacity": 1,
+            "width": 200,
+          }
+        }
+        testID="TEST_ID_BUTTON_SUBMIT_ITEM"
+      >
+        <Text
+          allowFontScaling={false}
+          style={
+            Array [
+              Object {
+                "color": "#FFF",
+                "fontSize": 30,
+              },
+              undefined,
+              Object {
+                "fontFamily": "Material Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+  <RCTScrollView>
+    <View />
+  </RCTScrollView>
+</RCTSafeAreaView>
+`;

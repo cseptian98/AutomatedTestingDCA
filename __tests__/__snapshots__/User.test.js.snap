@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User Screen renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFF",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../src/assets/images/profil.png",
+      }
+    }
+    style={
+      Object {
+        "height": 200,
+        "marginBottom": 30,
+        "marginTop": 30,
+        "width": 240,
+      }
+    }
+    testID="TEST_ID_IMAGE_USER"
+  />
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#B71C1C",
+        "borderRadius": 25,
+        "color": "#000",
+        "height": 50,
+        "justifyContent": "center",
+        "marginTop": 20,
+        "opacity": 1,
+        "width": "80%",
+      }
+    }
+    testID="TEST_ID_BUTTON_LOGOUT"
+  >
+    <Text
+      style={
+        Object {
+          "color": "#FFF",
+        }
+      }
+    >
+      Logout
+    </Text>
+  </View>
+</View>
+`;

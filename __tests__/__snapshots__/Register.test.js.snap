@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Register Screen renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFF",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../src/assets/images/register.png",
+      }
+    }
+    style={
+      Object {
+        "height": 200,
+        "marginBottom": 16,
+        "marginTop": 24,
+        "width": 280,
+      }
+    }
+    testID="TEST_ID_IMAGE_REGISTER"
+  />
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#212121",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "margin": 10,
+        "width": "90%",
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      keyboardType="email-address"
+      onChangeText={[Function]}
+      placeholder="Email"
+      placeholderTextColor="#000"
+      rejectResponderTermination={true}
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+      testID="TEST_ID_EMAIL_REGISTER"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#212121",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "margin": 10,
+        "width": "90%",
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="Password"
+      placeholderTextColor="#000"
+      rejectResponderTermination={true}
+      secureTextEntry={true}
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+      testID="TEST_ID_PASSWORD_REGISTER"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#000",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        󰈉
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderBottomColor": "#212121",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "margin": 10,
+        "width": "90%",
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      onChangeText={[Function]}
+      placeholder="Confirmation Password"
+      placeholderTextColor="#000"
+      rejectResponderTermination={true}
+      secureTextEntry={true}
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+      testID="TEST_ID_CONFIRMATION_PASSWORD"
+      underlineColorAndroid="transparent"
+      value=""
+    />
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#000",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        󰈉
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0D47A1",
+        "borderRadius": 16,
+        "height": 50,
+        "justifyContent": "center",
+        "marginTop": 20,
+        "opacity": 1,
+        "width": "90%",
+      }
+    }
+    testID="TEST_ID_BUTTON_REGISTER"
+  >
+    <Text
+      style={
+        Object {
+          "color": "#FFF",
+          "fontSize": 16,
+        }
+      }
+    >
+      Register
+    </Text>
+  </View>
+</View>
+`;

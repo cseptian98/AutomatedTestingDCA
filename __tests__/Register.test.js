@@ -34,7 +34,12 @@ describe('Register Screen', () => {
       TEST_ID_CONFIRMATION_PASSWORD,
     )
   })
-
+  it('renders correctly', async () => {
+    await waitFor(() => {
+      const screen = componentRegister.toJSON()
+      expect(screen).toMatchSnapshot()
+    })
+  })
   it('should show register screen', () => {
     expect(componentRegister.getByTestId(TEST_ID_IMAGE_REGISTER)).toBeTruthy()
   })

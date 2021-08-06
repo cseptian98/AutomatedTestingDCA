@@ -25,7 +25,12 @@ describe('TodoItems screen', () => {
       TEST_ID_BUTTON_SUBMIT_ITEM,
     )
   })
-
+  it('renders correctly', async () => {
+    await waitFor(() => {
+      const screen = componentTodoItems.toJSON()
+      expect(screen).toMatchSnapshot()
+    })
+  })
   it('should show todoitems screen', () => {
     expect(componentTodoItems.getByTestId(TEST_ID_IMAGE_TODOITEM)).toBeTruthy()
   })
