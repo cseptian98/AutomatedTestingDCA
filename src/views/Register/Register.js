@@ -21,6 +21,7 @@ import {
   TEST_ID_CONFIRMATION_PASSWORD,
   TEST_ID_BUTTON_REGISTER,
 } from 'constants'
+import {testProps} from 'utils/testProps.helper'
 
 const RegisterScreen = ({route, navigation}) => {
   const {url} = route.params
@@ -84,33 +85,33 @@ const RegisterScreen = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        style={styles.image}
         source={require('assets/images/register.png')}
-        testID={TEST_ID_IMAGE_REGISTER}
+        style={styles.image}
+        {...testProps(TEST_ID_IMAGE_REGISTER)}
       />
 
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
-          style={styles.textInput}
+          keyboardType="email-address"
+          onChangeText={value => setEmail(value)}
           placeholder="Email"
           placeholderTextColor="#000"
-          keyboardType="email-address"
+          style={styles.textInput}
           value={email}
-          testID={TEST_ID_EMAIL_REGISTER}
-          onChangeText={value => setEmail(value)}
+          {...testProps(TEST_ID_EMAIL_REGISTER)}
         />
       </View>
 
       <View style={styles.inputView}>
         <TextInput
-          style={styles.textInput}
+          onChangeText={value => setPassword(value)}
           placeholder="Password"
           placeholderTextColor="#000"
           secureTextEntry={showPassword}
+          style={styles.textInput}
           value={password}
-          testID={TEST_ID_PASSWORD_REGISTER}
-          onChangeText={value => setPassword(value)}
+          {...testProps(TEST_ID_PASSWORD_REGISTER)}
         />
         <TouchableOpacity onPress={setIconPassword} style={styles.icon}>
           {showPassword ? (
@@ -123,13 +124,13 @@ const RegisterScreen = ({route, navigation}) => {
 
       <View style={styles.inputView}>
         <TextInput
-          style={styles.textInput}
+          onChangeText={value => setConfirmPassword(value)}
           placeholder="Confirmation Password"
           placeholderTextColor="#000"
           secureTextEntry={showConfPassword}
+          style={styles.textInput}
           value={confirmationPassword}
-          testID={TEST_ID_CONFIRMATION_PASSWORD}
-          onChangeText={value => setConfirmPassword(value)}
+          {...testProps(TEST_ID_CONFIRMATION_PASSWORD)}
         />
         <TouchableOpacity onPress={setIconConfPassword} style={styles.icon}>
           {showConfPassword ? (
@@ -145,9 +146,9 @@ const RegisterScreen = ({route, navigation}) => {
       ) : (
         <>
           <TouchableOpacity
-            style={styles.registerButton}
             onPress={doRegister}
-            testID={TEST_ID_BUTTON_REGISTER}>
+            style={styles.registerButton}
+            {...testProps(TEST_ID_BUTTON_REGISTER)}>
             <Text style={styles.registerText}>Register</Text>
           </TouchableOpacity>
         </>

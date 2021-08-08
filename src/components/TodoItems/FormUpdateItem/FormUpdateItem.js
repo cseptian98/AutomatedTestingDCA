@@ -16,24 +16,12 @@ import {
   TEST_ID_BUTTON_UPDATE_DETAIL,
   TEST_ID_NOTES_ITEM,
 } from 'constants'
+import { testProps } from 'utils/testProps.helper'
 
 const FormUpdateItem = ({route, navigation}) => {
   const {url, item} = route.params
   const [isLoading, setIsLoading] = useState(false)
   const [note, setNote] = useState('')
-
-  // const backAction = () => {
-  //   const movePage = StackActions.pop(1)
-  //   navigation.dispatch(movePage)
-  //   return true
-  // }
-
-  // useEffect(() => {
-  //   BackHandler.addEventListener('hardwareBackPress', backAction)
-  //   return () => {
-  //     BackHandler.removeEventListener('hardwareBackPress', backAction)
-  //   }
-  // }, [])
 
   const updateItem = () => {
     setIsLoading(true)
@@ -78,20 +66,20 @@ const FormUpdateItem = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        style={styles.image}
         source={require('assets/images/update_item.png')}
-        testID={TEST_ID_IMAGE_UPDATE_ITEM}
+        style={styles.image}
+        {...testProps(TEST_ID_IMAGE_UPDATE_ITEM)}
       />
 
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
-          style={styles.textInput}
+          onChangeText={value => setNote(value)}
           placeholder="Note"
           placeholderTextColor="#000"
+          style={styles.textInput}
           value={note}
-          testID={TEST_ID_NOTES_ITEM}
-          onChangeText={value => setNote(value)}
+          {...testProps(TEST_ID_NOTES_ITEM)}
         />
       </View>
 
@@ -100,9 +88,10 @@ const FormUpdateItem = ({route, navigation}) => {
       ) : (
         <>
           <TouchableOpacity
-            style={styles.updateButton}
             onPress={updateItem}
-            testID={TEST_ID_BUTTON_UPDATE_DETAIL}>
+            style={styles.updateButton}
+            {...testProps(TEST_ID_BUTTON_UPDATE_DETAIL)}
+            >
             <Text style={styles.buttonText}>Update Item</Text>
           </TouchableOpacity>
         </>

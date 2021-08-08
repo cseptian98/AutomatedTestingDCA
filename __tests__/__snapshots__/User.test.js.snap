@@ -12,6 +12,7 @@ exports[`User Screen renders correctly 1`] = `
   }
 >
   <Image
+    accessibilityLabel="TEST_ID_IMAGE_USER"
     source={
       Object {
         "testUri": "../../../src/assets/images/profil.png",
@@ -28,6 +29,7 @@ exports[`User Screen renders correctly 1`] = `
     testID="TEST_ID_IMAGE_USER"
   />
   <View
+    accessibilityLabel="TEST_ID_BUTTON_LOGOUT"
     accessible={true}
     focusable={true}
     onClick={[Function]}

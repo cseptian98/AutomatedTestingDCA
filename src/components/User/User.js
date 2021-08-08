@@ -4,6 +4,7 @@ import {deleteData, getData} from 'api/Local'
 import axiosConfig from 'api/BaseConfig'
 import styles from './User.styles'
 import {TEST_ID_IMAGE_USER, TEST_ID_BUTTON_LOGOUT} from 'constants'
+import { testProps } from 'utils/testProps.helper'
 
 const User = ({route, navigation}) => {
   const [id, setId] = useState('')
@@ -30,13 +31,11 @@ const User = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        style={styles.image}
         source={require('assets/images/profil.png')}
-        testID={TEST_ID_IMAGE_USER}
+        style={styles.image}
+        {...testProps(TEST_ID_IMAGE_USER)}
       />
       <TouchableOpacity
-        style={styles.deleteButton}
-        testID={TEST_ID_BUTTON_LOGOUT}
         onPress={() =>
           Alert.alert('Logout', 'Are you sure to Logout?', [
             {
@@ -48,7 +47,10 @@ const User = ({route, navigation}) => {
               onPress: () => console.log('Cancel'),
             },
           ])
-        }>
+        }
+        style={styles.deleteButton}
+        {...testProps(TEST_ID_BUTTON_LOGOUT)}
+        >
         <Text style={styles.textButton}>Logout</Text>
       </TouchableOpacity>
     </View>

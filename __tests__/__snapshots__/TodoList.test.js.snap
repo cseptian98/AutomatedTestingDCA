@@ -20,6 +20,7 @@ exports[`Todolists Screen renders correctly 1`] = `
   >
     <View>
       <Image
+        accessibilityLabel="TEST_ID_IMAGE_TODOLIST"
         source={
           Object {
             "testUri": "../../../src/assets/images/list.png",
@@ -47,6 +48,7 @@ exports[`Todolists Screen renders correctly 1`] = `
       }
     >
       <TextInput
+        accessibilityLabel="TEST_ID_TEXT_INPUT_LIST"
         allowFontScaling={true}
         onChangeText={[Function]}
         placeholder="Add Todo List..."
@@ -68,6 +70,7 @@ exports[`Todolists Screen renders correctly 1`] = `
         value=""
       />
       <View
+        accessibilityLabel="TEST_ID_BUTTON_SUBMIT_LIST"
         accessible={true}
         focusable={true}
         onClick={[Function]}
@@ -114,7 +117,9 @@ exports[`Todolists Screen renders correctly 1`] = `
       </View>
     </View>
   </View>
-  <RCTScrollView>
+  <RCTScrollView
+    accessible={false}
+  >
     <View />
   </RCTScrollView>
 </RCTSafeAreaView>

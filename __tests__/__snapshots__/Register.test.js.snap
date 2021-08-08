@@ -12,6 +12,7 @@ exports[`Register Screen renders correctly 1`] = `
   }
 >
   <Image
+    accessibilityLabel="TEST_ID_IMAGE_REGISTER"
     source={
       Object {
         "testUri": "../../../src/assets/images/register.png",
@@ -39,6 +40,7 @@ exports[`Register Screen renders correctly 1`] = `
     }
   >
     <TextInput
+      accessibilityLabel="TEST_ID_EMAIL_REGISTER"
       allowFontScaling={true}
       keyboardType="email-address"
       onChangeText={[Function]}
@@ -67,6 +69,7 @@ exports[`Register Screen renders correctly 1`] = `
     }
   >
     <TextInput
+      accessibilityLabel="TEST_ID_PASSWORD_REGISTER"
       allowFontScaling={true}
       onChangeText={[Function]}
       placeholder="Password"
@@ -134,6 +137,7 @@ exports[`Register Screen renders correctly 1`] = `
     }
   >
     <TextInput
+      accessibilityLabel="TEST_ID_CONFIRMATION_PASSWORD"
       allowFontScaling={true}
       onChangeText={[Function]}
       placeholder="Confirmation Password"
@@ -190,6 +194,7 @@ exports[`Register Screen renders correctly 1`] = `
     </View>
   </View>
   <View
+    accessibilityLabel="TEST_ID_BUTTON_REGISTER"
     accessible={true}
     focusable={true}
     onClick={[Function]}

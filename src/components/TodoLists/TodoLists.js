@@ -18,6 +18,7 @@ import {
   TEST_ID_BUTTON_SUBMIT_LIST,
   TEST_ID_TODOLIST,
 } from 'constants'
+import {testProps} from 'utils/testProps.helper'
 
 const TodoLists = ({route, navigation}) => {
   const [list, setList] = useState([])
@@ -51,10 +52,7 @@ const TodoLists = ({route, navigation}) => {
       setRefetch(true)
     }
 
-    axiosConfig
-      .delete(`${url}/${item.id}`)
-      .then(onSuccess)
-      .catch(onFailure)
+    axiosConfig.delete(`${url}/${item.id}`).then(onSuccess).catch(onFailure)
   }
 
   const submit = () => {
@@ -115,35 +113,34 @@ const TodoLists = ({route, navigation}) => {
       <View style={styles.inputContainer}>
         <View>
           <Image
-            style={styles.image}
             source={require('assets/images/list.png')}
-            testID={TEST_ID_IMAGE_TODOLIST}
+            style={styles.image}
+            {...testProps(TEST_ID_IMAGE_TODOLIST)}
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
-            style={styles.textInput}
+            onChangeText={value => setTitle(value)}
             placeholder="Add Todo List..."
             placeholderTextColor="#FFF"
+            style={styles.textInput}
             value={title}
-            onChangeText={value => setTitle(value)}
-            testID={TEST_ID_TEXT_INPUT_LIST}
+            {...testProps(TEST_ID_TEXT_INPUT_LIST)}
           />
           <TouchableOpacity
+            onPress={submit}
             style={styles.button}
-            testID={TEST_ID_BUTTON_SUBMIT_LIST}
-            onPress={submit}>
+            {...testProps(TEST_ID_BUTTON_SUBMIT_LIST)}>
             <Icon name={button} size={30} color="#FFF" />
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView>
+      <ScrollView accessible={false}>
         {list.map(item => {
           return (
             <List
               key={item.id}
               title={item.title}
-              testID={TEST_ID_TODOLIST}
               onPress={() => moveToItems(item)}
               onUpdate={() => selectItem(item)}
               onDelete={() =>
@@ -162,6 +159,7 @@ const TodoLists = ({route, navigation}) => {
                   ],
                 )
               }
+              {...testProps(TEST_ID_TODOLIST)}
             />
           )
         })}

@@ -12,6 +12,7 @@ exports[`Login Components renders correctly 1`] = `
   }
 >
   <Image
+    accessibilityLabel="TEST_ID_IMAGE_LOGIN"
     source={
       Object {
         "testUri": "../../../src/assets/images/login.png",
@@ -39,6 +40,7 @@ exports[`Login Components renders correctly 1`] = `
     }
   >
     <TextInput
+      accessibilityLabel="TEST_ID_EMAIL_LOGIN"
       allowFontScaling={true}
       keyboardType="email-address"
       onChangeText={[Function]}
@@ -67,6 +69,7 @@ exports[`Login Components renders correctly 1`] = `
     }
   >
     <TextInput
+      accessibilityLabel="TEST_ID_PASSWORD_LOGIN"
       allowFontScaling={true}
       onChangeText={[Function]}
       placeholder="Password"
@@ -123,6 +126,7 @@ exports[`Login Components renders correctly 1`] = `
     </View>
   </View>
   <View
+    accessibilityLabel="TEST_ID_BUTTON_LOGIN"
     accessible={true}
     focusable={true}
     onClick={[Function]}
@@ -158,6 +162,7 @@ exports[`Login Components renders correctly 1`] = `
     </Text>
   </View>
   <View
+    accessibilityLabel="TEST_ID_CREATE_ACCOUNT"
     accessible={true}
     focusable={true}
     onClick={[Function]}

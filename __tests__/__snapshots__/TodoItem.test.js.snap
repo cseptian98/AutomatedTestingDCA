@@ -20,6 +20,7 @@ exports[`TodoItems screen renders correctly 1`] = `
   >
     <View>
       <Image
+        accessibilityLabel="TEST_ID_IMAGE_TODOITEM"
         source={
           Object {
             "testUri": "../../../src/assets/images/item.png",
@@ -47,6 +48,7 @@ exports[`TodoItems screen renders correctly 1`] = `
       }
     >
       <TextInput
+        accessibilityLabel="TEST_ID_TEXT_INPUT_ITEM"
         allowFontScaling={true}
         onChangeText={[Function]}
         placeholder="Add Todo Item..."
@@ -68,6 +70,7 @@ exports[`TodoItems screen renders correctly 1`] = `
         value=""
       />
       <View
+        accessibilityLabel="TEST_ID_BUTTON_SUBMIT_ITEM"
         accessible={true}
         focusable={true}
         onClick={[Function]}
@@ -114,7 +117,9 @@ exports[`TodoItems screen renders correctly 1`] = `
       </View>
     </View>
   </View>
-  <RCTScrollView>
+  <RCTScrollView
+    accessible={false}
+  >
     <View />
   </RCTScrollView>
 </RCTSafeAreaView>

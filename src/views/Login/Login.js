@@ -21,6 +21,7 @@ import {
   TEST_ID_BUTTON_LOGIN,
   TEST_ID_BUTTON_CREATE_ACCOUNT,
 } from 'constants'
+import {testProps} from 'utils/testProps.helper'
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('')
@@ -80,33 +81,33 @@ const LoginScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        style={styles.image}
         source={require('assets/images/login.png')}
-        testID={TEST_ID_IMAGE_LOGIN}
+        style={styles.image}
+        {...testProps(TEST_ID_IMAGE_LOGIN)}
       />
 
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
-          style={styles.textInput}
+          keyboardType="email-address"
+          onChangeText={value => setEmail(value)}
           placeholder="Email"
           placeholderTextColor="#000"
-          keyboardType="email-address"
+          style={styles.textInput}
           value={email}
-          onChangeText={value => setEmail(value)}
-          testID={TEST_ID_EMAIL_LOGIN}
+          {...testProps(TEST_ID_EMAIL_LOGIN)}
         />
       </View>
 
       <View style={styles.inputView}>
         <TextInput
-          style={styles.textInput}
+          onChangeText={value => setPassword(value)}
           placeholder="Password"
           placeholderTextColor="#000"
           secureTextEntry={showPassword}
+          style={styles.textInput}
           value={password}
-          onChangeText={value => setPassword(value)}
-          testID={TEST_ID_PASSWORD_LOGIN}
+          {...testProps(TEST_ID_PASSWORD_LOGIN)}
         />
         <TouchableOpacity onPress={setIconPassword} style={styles.icon}>
           {showPassword ? (
@@ -121,15 +122,15 @@ const LoginScreen = ({navigation}) => {
       ) : (
         <>
           <TouchableOpacity
-            style={styles.loginButton}
             onPress={doLogin}
-            testID={TEST_ID_BUTTON_LOGIN}>
+            style={styles.loginButton}
+            {...testProps(TEST_ID_BUTTON_LOGIN)}>
             <Text style={styles.textButton}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.registerButton}
             onPress={toRegister}
-            testID={TEST_ID_BUTTON_CREATE_ACCOUNT}>
+            style={styles.registerButton}
+            {...testProps(TEST_ID_BUTTON_CREATE_ACCOUNT)}>
             <Text style={styles.textButton2}>Create Account</Text>
           </TouchableOpacity>
         </>

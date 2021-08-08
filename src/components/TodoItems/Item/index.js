@@ -7,25 +7,26 @@ import {
   TEST_ID_BUTTON_UPDATE_ITEM,
   TEST_ID_TITLE_TODOITEM,
 } from 'constants'
+import { testProps } from 'utils/testProps.helper'
 
 const Item = ({title, onDelete, onUpdate, onUpdateItem}) => (
   <View style={styles.itemContainer}>
     <TouchableOpacity
+      onPress={onUpdateItem}
       style={styles.item}
-      testID={TEST_ID_TITLE_TODOITEM}
-      onPress={onUpdateItem}>
+      {...testProps(TEST_ID_TITLE_TODOITEM)}>
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
     <TouchableOpacity
-      style={styles.delete}
       onPress={onUpdate}
-      testID={TEST_ID_BUTTON_UPDATE_ITEM}>
+      style={styles.delete}
+      {...testProps(TEST_ID_BUTTON_UPDATE_ITEM)}>
       <Icon name="edit" size={24} color="#B71C1C" />
     </TouchableOpacity>
     <TouchableOpacity
-      style={styles.delete}
       onPress={onDelete}
-      testID={TEST_ID_BUTTON_DELETE_ITEM}>
+      style={styles.delete}
+      {...testProps(TEST_ID_BUTTON_DELETE_ITEM)}>
       <Icon name="delete" size={24} color="#B71C1C" />
     </TouchableOpacity>
   </View>

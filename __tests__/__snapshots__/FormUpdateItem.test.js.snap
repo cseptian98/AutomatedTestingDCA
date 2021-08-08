@@ -12,6 +12,7 @@ exports[`From Update Item renders correctly 1`] = `
   }
 >
   <Image
+    accessibilityLabel="TEST_ID_IMAGE_UPDATE_ITEM"
     source={
       Object {
         "testUri": "../../../src/assets/images/update_item.png",
@@ -39,6 +40,7 @@ exports[`From Update Item renders correctly 1`] = `
     }
   >
     <TextInput
+      accessibilityLabel="TEST_ID_NOTES_ITEM"
       allowFontScaling={true}
       onChangeText={[Function]}
       placeholder="Note"
@@ -55,6 +57,7 @@ exports[`From Update Item renders correctly 1`] = `
     />
   </View>
   <View
+    accessibilityLabel="TEST_ID_BUTTON_UPDATE_DETAIL"
     accessible={true}
     focusable={true}
     onClick={[Function]}

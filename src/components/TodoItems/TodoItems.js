@@ -19,6 +19,7 @@ import {
   TEST_ID_BUTTON_SUBMIT_ITEM,
   TEST_ID_TODOITEM,
 } from 'constants'
+import { testProps } from 'utils/testProps.helper'
 
 const TodoItems = ({route, navigation}) => {
   const {ListId, url} = route.params
@@ -125,35 +126,34 @@ const TodoItems = ({route, navigation}) => {
       <View style={styles.itemContainer}>
         <View>
           <Image
-            style={styles.image}
             source={require('assets/images/item.png')}
-            testID={TEST_ID_IMAGE_TODOITEM}
+            style={styles.image}
+            {...testProps(TEST_ID_IMAGE_TODOITEM)}
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
-            style={styles.textInput}
+            onChangeText={value => setTitle(value)}
             placeholder="Add Todo Item..."
             placeholderTextColor="#FFF"
+            style={styles.textInput}
             value={title}
-            testID={TEST_ID_TEXT_INPUT_ITEM}
-            onChangeText={value => setTitle(value)}
+            {...testProps(TEST_ID_TEXT_INPUT_ITEM)}
           />
           <TouchableOpacity
-            style={styles.button}
             onPress={submit}
-            testID={TEST_ID_BUTTON_SUBMIT_ITEM}>
+            style={styles.button}
+            {...testProps(TEST_ID_BUTTON_SUBMIT_ITEM)}>
             <Icon name={button} size={30} color="#FFF" />
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView>
+      <ScrollView accessible={false}>
         {item.map(data => {
           return (
             <Item
               key={data.id}
               title={data.title}
-              testID={TEST_ID_TODOITEM}
               onUpdateItem={() => formUpdate(data)}
               onUpdate={() => selectItem(data)}
               onDelete={() =>
@@ -172,6 +172,7 @@ const TodoItems = ({route, navigation}) => {
                   ],
                 )
               }
+              {...testProps(TEST_ID_TODOITEM)}
             />
           )
         })}
