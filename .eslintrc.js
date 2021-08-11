@@ -31,8 +31,6 @@ module.exports = {
     'import/prefer-default-export': [0],
     'no-underscore-dangle': [0],
     'prettier/prettier': 'error',
-    'react/forbid-prop-types': [0],
-    'react/no-did-update-set-state': [0],
     'react/jsx-props-no-spreading': [0],
   },
   settings: {

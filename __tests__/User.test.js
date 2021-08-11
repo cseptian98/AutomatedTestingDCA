@@ -10,7 +10,7 @@ describe('User Screen', () => {
   beforeEach(() => {
     componentUser = render(<User route={{params}} />)
 
-    buttonLogin = componentUser.getByTestId(TEST_ID_BUTTON_LOGOUT)
+    buttonLogout = componentUser.getByTestId(TEST_ID_BUTTON_LOGOUT)
   })
   it('renders correctly', async () => {
     await waitFor(() => {
